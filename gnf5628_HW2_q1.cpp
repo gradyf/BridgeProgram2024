@@ -1,10 +1,55 @@
 #include <iostream>
 
+/*
+ * Write a program that asks the user to enter a number of quarters,
+ * dimes, nickels and pennies and then outputs the monetary value of
+ * the coins in the format of dollars and remaining cents.
+
+ Your program should interact with the user exactly as it shows in the following example:
+
+ Please enter number of coins:
+ # of quarters:13
+ # of dimes: 4
+ # of nickels: 1
+ # of pennies: 17
+ The total is 4dollars and 37 cents
+ *
+ */
+
+const double QUARTER = 0.25;
+const double DIME = 0.10;
+const double NICKEL = 0.05;
+const double PENNY = 0.01;
+
 int main() {
-    std::cout << "Hello, World! Again!" << std::endl;
 
-    std::cout << "Pushing from work: 11:05pm" << std::endl;
+    int numQuarters;
+    int numDimes;
+    int numNickels;
+    int numPennies;
 
-    std::cout << "Pushing from home: 11:07om" << std::endl;
+    double total;
+
+    std::cout << "Please enter number of coins:" << std::endl;
+
+    std::cout << "# of quarters: " ;
+    std::cin >> numQuarters;
+
+    std::cout << "# of dimes: " ;
+    std::cin >> numDimes;
+
+    std::cout << "# of nickels: " ;
+    std::cin >> numNickels;
+
+    std::cout << "# of pennies: " ;
+    std::cin >> numPennies;
+
+    total = QUARTER * numQuarters + DIME * numDimes + NICKEL * numNickels + PENNY * numPennies;
+
+    std::cout << "The total is " << total / 1 << " dollars and "; //<< total % 100.0 << " cents";
+
+
+
+
     return 0;
 }
