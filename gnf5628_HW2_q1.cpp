@@ -30,6 +30,11 @@ int main() {
 
     double total;
 
+    int totalDollars;
+    double totalCents;
+
+
+
     std::cout << "Please enter number of coins:" << std::endl;
 
     std::cout << "# of quarters: " ;
@@ -46,7 +51,11 @@ int main() {
 
     total = QUARTER * numQuarters + DIME * numDimes + NICKEL * numNickels + PENNY * numPennies;
 
-    std::cout << "The total is " << total / 1 << " dollars and "; //<< total % 100.0 << " cents";
+    totalDollars = int (total);
+    totalCents = total - totalDollars;
+
+
+    std::cout << "The total is " << totalDollars << " dollars and  " << totalCents << " cents.";
 
 
 
