@@ -1,4 +1,5 @@
 #include <iostream>
+using namespace std;
 // Created by Gray Forrester on 1/10/24.
 //
 
@@ -19,5 +20,18 @@ Your program should interact with the user exactly as it shows in the following 
  */
 
 int main() {
-    std::cout << "hello from 4!";
+    int x, y;
+
+    cout << "Please enter two positive integers, separated by a space:" << endl;
+
+    cin >> x;
+    cin >> y;
+
+    cout << x << "+" << y << "=" << (x + y) << endl;
+    cout << x << "-" << y << "=" << (x - y) << endl;
+    cout << x << "*" << y << "=" << (x * y) << endl;
+    cout << x << "/" << y << "=" << ((double) x / (double) y) << endl;
+    cout << x << "div" << y << "=" << (x / y) << endl;
+    cout << x << "mod" << y << "=" << ( x % y) << endl;
+
 }

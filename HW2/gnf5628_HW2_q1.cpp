@@ -1,5 +1,5 @@
 #include <iostream>
-
+using namespace std;
 /*
  * Write a program that asks the user to enter a number of quarters,
  * dimes, nickels and pennies and then outputs the monetary value of
