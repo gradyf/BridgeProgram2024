@@ -22,17 +22,30 @@ worked, and prints the total time both of them worked together as days, hours, m
 
 int main() {
 
+    int johnDays, johnHours, johnMinutes, billDays, billHours, billMinutes,
+        totalDays, totalHours, totalMinutes;
+
     cout << "Please enter the number of days John has worked: " << endl;
+    cin >> johnDays;
 
     cout << "Please enter the number of hours John has worked: " << endl;
+    cin >> johnHours;
 
     cout << "Please enter the number of minutes John has worked: " << endl;
+    cin >> johnMinutes;
 
     cout << "Please enter the number of days Bill has worked: " << endl;
+    cin >> billDays;
 
     cout << "Please enter the number of hours Bill has worked: " << endl;
+    cin >> billHours;
 
     cout << "Please enter the number of minutes Bill has worked: " << endl;
+    cin >> billMinutes;
+
+    totalMinutes = johnMinutes + billMinutes;
+    totalHours = johnHours + billHours;
+    totalDays = johnDays + billDays;
 
 
     cout << "The total time both of them worked together is: < 6 days, 3 hours and 35 minutes.
