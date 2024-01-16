@@ -1,6 +1,9 @@
 #include <iostream>
 
-using namespace std:
+const int HOURS_IN_DAY = 24;
+const int MINUTES_IN_HOUR = 60;
+
+using namespace std;
 
 /*
 Question 3:
@@ -47,6 +50,12 @@ int main() {
     totalHours = johnHours + billHours;
     totalDays = johnDays + billDays;
 
+    totalHours = totalHours + (totalMinutes / MINUTES_IN_HOUR);
+    totalDays = totalDays + (totalHours / HOURS_IN_DAY);
 
-    cout << "The total time both of them worked together is: < 6 days, 3 hours and 35 minutes.
+    totalMinutes = totalMinutes - ((totalMinutes / MINUTES_IN_HOUR) * MINUTES_IN_HOUR);
+    totalHours = totalHours - ((totalHours / HOURS_IN_DAY) * HOURS_IN_DAY);
+
+    cout << "The total time both of them worked together is: " << totalDays << " days, "
+            << totalHours << " hours, and " << totalMinutes << " minutes.";
 }
