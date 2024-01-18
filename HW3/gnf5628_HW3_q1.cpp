@@ -29,5 +29,19 @@ using namespace std;
 
 int main() {
 
-    cout << "Hello World";
+    double base_priice, item_one_price, item_two_price, total_price, discount, price_after_discount;
+
+    char club_card;
+
+    double tax_rate;
+
+    cout << "Enter price of first item: ";
+    cin >> item_one_price;
+
+    cout << "Enter price of second item: ";
+    cin >> item_two_price;
+
+    cout << "Does customer have a club card? (Y/N): ";
+    cin >> club_card;
+
 }
