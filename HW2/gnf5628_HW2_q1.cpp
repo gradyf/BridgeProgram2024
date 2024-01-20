@@ -37,28 +37,25 @@ int main() {
 
     std::cout << "Please enter number of coins:" << std::endl;
 
-    std::cout << "# of quarters: " ;
+    std::cout << "# of quarters:" ;
     std::cin >> numQuarters;
 
-    std::cout << "# of dimes: " ;
+    std::cout << "# of dimes:" ;
     std::cin >> numDimes;
 
-    std::cout << "# of nickels: " ;
+    std::cout << "# of nickels:" ;
     std::cin >> numNickels;
 
-    std::cout << "# of pennies: " ;
+    std::cout << "# of pennies:" ;
     std::cin >> numPennies;
 
     total = QUARTER * numQuarters + DIME * numDimes + NICKEL * numNickels + PENNY * numPennies;
 
     totalDollars = int (total);
-    totalCents = total - totalDollars;
+    totalCents = (total - totalDollars)*100;
 
 
-    std::cout << "The total is " << totalDollars << " dollars and  " << totalCents << " cents.";
-
-
-
+    std::cout << "The total is " << totalDollars << " dollars and " << totalCents << " cents.";
 
     return 0;
 }

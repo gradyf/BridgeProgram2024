@@ -27,11 +27,11 @@ int main() {
     cin >> x;
     cin >> y;
 
-    cout << x << "+" << y << "=" << (x + y) << endl;
-    cout << x << "-" << y << "=" << (x - y) << endl;
-    cout << x << "*" << y << "=" << (x * y) << endl;
-    cout << x << "/" << y << "=" << ((double) x / (double) y) << endl;
-    cout << x << "div" << y << "=" << (x / y) << endl;
-    cout << x << "mod" << y << "=" << ( x % y) << endl;
+    cout << x << " + " << y << " = " << (x + y) << endl;
+    cout << x << " - " << y << " = " << (x - y) << endl;
+    cout << x << " * " << y << " = " << (x * y) << endl;
+    cout << x << " / " << y << " = " << ((double) x / (double) y) << endl;
+    cout << x << " div " << y << " = " << (x / y) << endl;
+    cout << x << " mod " << y << " = " << ( x % y) << endl;
 
 }
