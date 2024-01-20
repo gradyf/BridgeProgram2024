@@ -55,8 +55,8 @@ int main() {
     if (item_one_price <= item_two_price ) {
         if (has_card == 'Y' || has_card == 'y') {
             base_price = item_one_price + item_two_price;
-            price_after_discount = (HALF_PRICE * item_one_price) + item_two_price;
-            total_price = ((price_after_discount)*MEMBER_DISCOUNT)*(1+ tax_rate/100);
+            price_after_discount = ((HALF_PRICE * item_one_price) + item_two_price)*MEMBER_DISCOUNT;
+            total_price = ((price_after_discount))*(1+ tax_rate/100);
         }
         else {
             base_price = item_one_price + item_two_price;
@@ -67,8 +67,8 @@ int main() {
     else {
         if (has_card == 'Y' || has_card == 'y') {
             base_price = item_one_price + item_two_price;
-            price_after_discount = (HALF_PRICE * item_two_price) + item_one_price;
-            total_price = ((price_after_discount)*MEMBER_DISCOUNT)*(1+ tax_rate/100);
+            price_after_discount = ((HALF_PRICE * item_two_price) + item_one_price)*MEMBER_DISCOUNT;
+            total_price = ((price_after_discount))*(1+ tax_rate/100);
         }
         else {
             base_price = item_one_price + item_two_price;
@@ -79,7 +79,7 @@ int main() {
 
     cout << "Base price: " << base_price << endl;
     cout << "Price after discounts: " << price_after_discount << endl;
-    cout << "Total Price: " << total_price << endl
+    cout << "Total Price: " << total_price << endl;
 
 
 }
