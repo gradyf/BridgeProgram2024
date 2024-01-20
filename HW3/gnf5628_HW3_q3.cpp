@@ -22,3 +22,24 @@
 
 using namespace std;
 
+int main() {
+    int a, b, c;
+
+    cout << "Please enter a value of a: " << endl;
+    cin >> a;
+
+    cout << "Please enter a value of b: " << endl;
+    cin >> b;
+
+    cout << "Please enter a value of c: " << endl;
+    cin >> c;
+
+    if (a == 0 && b == 0 && c == 0) {
+        cout << "This equation has an infinite number of solutions.";
+    }
+    else if (a == 0 && b == 0 && c != 0) {
+        cout << "This equation has no solution";
+    }
+
+
+}
