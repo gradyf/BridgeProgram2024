@@ -40,12 +40,24 @@ int main() {
     switch (choice) {
 
         case (FLOOR_ROUND):
-            new_number = (int) base_number;
-            cout << new_number;
+            if (base_number >=0) {
+                new_number = (int) base_number;
+                cout << new_number;
+            }
+            else {
+                new_number = (int) base_number - 1;
+                cout << new_number;
+            }
             break;
         case (CEILING_ROUND):
-            new_number = (int) base_number + 1;
-            cout << new_number;
+            if (base_number >= 0) {
+                new_number = (int) base_number + 1;
+                cout << new_number;
+            }
+            else {
+                new_number = (int) base_number ;
+                cout << new_number;
+            }
             break;
         case (ROUND):
             decimal_number = base_number - (int) base_number;
@@ -53,8 +65,14 @@ int main() {
             if (decimal_number >= 0.5) {
                 new_number = (int) base_number + 1;
             }
-            else {
+            else if (decimal_number <= 0.5 && decimal_number >= 0){
                 new_number = (int) base_number;
+            }
+            else if (decimal_number < -0.5) {
+                new_number = (int) base_number-1;
+            }
+            else {
+                new_number = (int) base_number ;
             }
 
             cout << new_number;
