@@ -77,8 +77,15 @@ int main() {
         }
     }
 
+    cout.setf(ios::fixed);
+    cout.setf(ios::showpoint);
+    cout.precision(1);
     cout << "Base price: " << base_price << endl;
     cout << "Price after discounts: " << price_after_discount << endl;
+
+    cout.setf(ios::fixed);
+    cout.setf(ios::showpoint);
+    cout.precision(5);
     cout << "Total Price: " << total_price << endl;
 
 
