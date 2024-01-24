@@ -2,22 +2,24 @@
 // Created by Gray Forrester on 1/24/24.
 //
 #include <iostream>
+#include <cmath>
 using namespace std;
 
 int main () {
 
-    int input, tracker = 0, remainder = 0, total, base_two;
+    int input, remainder = 0, total, base_two;
+
+    double tracker = 0;
+
 
     cout << "Enter a decimal number: ";
     cin >> input;
 
     while (input > 0 ) {
-        base_two = 2;
+        double base_two = 2;
         remainder = input % 2;
 
-        for (int i = 0; i <= tracker; i++) {
-            base_two = base_two*i;
-        }
+        base_two = pow(2,tracker);
 
         total = base_two * remainder;
 
