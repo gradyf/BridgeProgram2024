@@ -26,6 +26,7 @@ const double DIME = 0.10;
 const double NICKEL = 0.05;
 const double PENNY = 0.01;
 
+
 int main() {
 
     int numQuarter = 0, numDime = 0, numNickel = 0, numPenny = 0;
@@ -37,7 +38,7 @@ int main() {
     cin >> totalDollars;
     cin >> totalCents;
 
-    totalMoney = totalDollars + (totalCents / 100);
+    totalMoney = totalDollars + (totalCents / 100.0);
 
     numQuarter = totalMoney / QUARTER;
 
@@ -51,7 +52,7 @@ int main() {
 
     totalMoney = totalMoney - (numNickel * NICKEL);
 
-    numPenny = totalMoney / PENNY;
+    numPenny = totalMoney / (double) PENNY;
 
     cout << totalDollars << " dollars and " << totalCents << " cents are: " << endl;
     cout << numQuarter << " quarters, " << numDime << " dimes, " << numNickel << " nickels and "
