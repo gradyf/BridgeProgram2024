@@ -8,8 +8,6 @@ using namespace std;
 
 int main() {
 
-
-
     int top_spaces_lines = 0;
     int top_stars_lines;
 

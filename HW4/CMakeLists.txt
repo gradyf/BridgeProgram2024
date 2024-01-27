@@ -13,3 +13,6 @@ add_executable(HW4_q4 gnf5628_HW4_q4.cpp
 )
 add_executable(HW4_q5 gnf5628_HW4_q5.cpp
 )
+
+add_executable(HW4_q6 gnf5628_HW4_q6.cpp
+)
