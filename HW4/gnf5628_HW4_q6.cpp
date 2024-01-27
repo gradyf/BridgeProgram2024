@@ -14,9 +14,23 @@ int main() {
     cin >> length;
 
     while (counter <= length) {
-        cout << counter << endl;
+        int temp = counter;
+        int even_count = 0;
+        int odd_count = 0;
+
+        while (temp > 0) {
+            if ((temp % 10) % 2 == 0) {
+                even_count++;
+            }
+            else {
+                odd_count++;
+            }
+            temp = temp / 10;
+        }
+
+        if (even_count > odd_count) {
+            cout << counter << endl;
+        }
         counter++;
     }
-
-
 }
