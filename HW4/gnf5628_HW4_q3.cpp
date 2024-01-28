@@ -5,36 +5,49 @@
 
 using namespace std;
 
+const int POWER2_0 =  1;
+
 int main () {
 
-    int input, total=0;
+    int input;
+
+    int input_Temp_1;
+    int input_Temp_2;
 
     int tracker = 0;
 
     cout << "Enter a decimal number: ";
     cin >> input;
 
-    while (input > 0 ) {
+    input_Temp_1 = input;
+    input_Temp_2 = input;
 
-        cout << input % 2;
 
-        input = input / 2;
+    while (input_Temp_1 > 0 ) {
+
+        input_Temp_1 = input_Temp_1 / 2;
         tracker++;
-
 
     }
 
-    cout << "tracker is: " << tracker << endl;
+    int counter = tracker-1;
 
+    for (int x = tracker; x > 0; x--) {
+        int temp = 1;
 
-    while (tracker >= 0) {
-        int temp_base_2 = 0;
+        for (int y = 0; y < counter; y++) {
+            temp = temp * 2;
+        }
 
-        for (int x = tracker - 1; x >= 0; x-- )
-            temp_base_2 = temp_base_2 * 2;
+        if (input_Temp_2 - temp >= 0) {
+            cout << "1";
+            input_Temp_2 -= temp;
+        }
+        else {
+            cout << "0";
+        }
+        counter--;
 
-        cout << "Base 2: " << temp_base_2 << endl;
-        tracker--;
     }
 }
 
