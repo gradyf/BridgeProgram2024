@@ -32,22 +32,27 @@ int main () {
 
     int counter = tracker-1;
 
-    for (int x = tracker; x > 0; x--) {
-        int temp = 1;
+    if (input == 0) {
+        cout << "0";
+    }
+    else {
 
-        for (int y = 0; y < counter; y++) {
-            temp = temp * 2;
-        }
+        for (int x = tracker; x > 0; x--) {
+            int temp = 1;
 
-        if (input_Temp_2 - temp >= 0) {
-            cout << "1";
-            input_Temp_2 -= temp;
-        }
-        else {
-            cout << "0";
-        }
-        counter--;
+            for (int y = 0; y < counter; y++) {
+                temp = temp * 2;
+            }
 
+            if (input_Temp_2 - temp >= 0) {
+                cout << "1";
+                input_Temp_2 -= temp;
+            } else {
+                cout << "0";
+            }
+            counter--;
+
+        }
     }
 }
 
