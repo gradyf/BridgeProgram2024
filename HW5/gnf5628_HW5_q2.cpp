@@ -28,7 +28,7 @@ int main() {
 
     cout << rand_ans << endl;
 
-    cout << "I thought of a number between 1 and 100! Try to guess it.";
+    cout << "I thought of a number between 1 and 100! Try to guess it." << endl;
 
 
     while (count > 0) {
@@ -41,7 +41,16 @@ int main() {
 
         if (guess == rand_ans) {
             cout << "Correct! You guessed my number in " << (5 - count) << " guesses";
+            count = -1;
             break;
+        }
+        else if (guess > rand_ans) {
+            cout << "Wrong! My number is smaller." << endl;
+            upper_bound = guess;
+        }
+        else if (guess < rand_ans) {
+            cout << "Wrong! My number is bigger." << endl;
+            lower_bound = guess;
         }
 
 
