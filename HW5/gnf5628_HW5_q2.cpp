@@ -26,7 +26,7 @@ int main() {
     // initializing the random guess variable
     rand_ans = (rand() % 100) + 1;
 
-    cout << rand_ans << endl;
+
 
     cout << "I thought of a number between 1 and 100! Try to guess it." << endl;
 
