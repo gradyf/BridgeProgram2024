@@ -22,10 +22,26 @@ int main() {
 
 int fib(int n) {
 
-    int output = 1;
+    int output = 0;
+    int back_one = 0;
+    int back_two = 0;
 
     for (int x = 0; x < n; x++) {
-        output += output;
+
+        if (x == 0) {
+           output = 1;
+        }
+        else if (x == 1) {
+            output = 1;
+            back_one = 1;
+        }
+        else {
+            back_two = back_one;
+            back_one = output;
+            output = back_one + back_two;
+
+        }
+
     }
     return output;
 }
