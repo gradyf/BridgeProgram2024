@@ -9,9 +9,18 @@ void printPineTree(int n, char symbol);
 #include <iostream>
 using namespace std;
 int main() {
-    printShiftedTriangle(3,4,'+');
 
-    printShiftedTriangle(5,3,'#');
+    int size, offset;
+    char symbol;
+
+    cout << "Please enter a size, offset, and symbol seperated by a enter: " << endl;
+
+    cin >> size
+        >> offset
+        >> symbol;
+
+    printShiftedTriangle(size,offset,symbol);
+
 }
 
 
