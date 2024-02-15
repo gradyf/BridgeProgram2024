@@ -23,7 +23,6 @@ int main() {
 }
 
 
-
 void printShiftedTriangle(int n, int m, char symbol) {
 
     int spaces = n-1;
