@@ -33,11 +33,11 @@ void printShiftedTriangle(int n, int m, char symbol) {
     for (int rows = 0; rows < n; rows++) {
 
         for (int indent = 0; indent < m; indent++) {
-            cout << "0";
+            cout << " ";
         }
 
         for (int sp = 0; sp < spaces; sp++) {
-            cout << "0";
+            cout << " ";
         }
 
         for (int sy = 0; sy < symb_count; sy++) {
@@ -55,7 +55,7 @@ void printShiftedTriangle(int n, int m, char symbol) {
 
 void printPineTree(int n, char symbol) {
 
-    int temp_tree_size = 2, temp_tree_offset = n;
+    int temp_tree_size = 2, temp_tree_offset = n-1;
 
     //outer loop that sets the number of "levels" of the tree
     for (int level = 0; level < n; level++){
