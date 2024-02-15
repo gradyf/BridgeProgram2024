@@ -51,8 +51,38 @@ year (1 for Monday, 2 for Tuesday, 3 for Wednesday, etc.).
 #include <iostream>
 using namespace std;
 
+int printMonthCalendar(int numOfDays, int startingDay);
 
 int main() {
+    int days, start;
+    cout << "Please enter number of days and starting day: " << endl;
+    cin >> days
+        >> start;
 
-    cout << "Test123";
+    printMonthCalendar(days, start);
+}
+
+int printMonthCalendar(int numOfDays, int startingDay) {
+    int rows;
+
+    if (numOfDays % 7 == 0) {
+        rows = 4;
+    }
+    else {
+        rows = 5;
+    }
+
+    //rows
+    for (int r = 0; r < rows; r++) {
+
+        //column
+        for (int c = 0; c < 7; c++) {
+            cout << 1;
+
+        }
+        cout << endl;
+    }
+
+
+    return (startingDay + (numOfDays - 29));
 }
