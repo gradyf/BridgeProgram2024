@@ -14,7 +14,6 @@ int main () {
     for (int n = 1; n <= 15; n++) {
         cout << "n = " << n << '\t' << eApprox(n) << endl;
     }
-
     return 0;
 }
 
