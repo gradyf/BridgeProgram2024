@@ -45,28 +45,28 @@ int main() {
             break;
         }
         else if (guess > rand_ans && guess == upper_bound) {
-            cout << "Wrong! My number is smaller." << endl;
+            cout << "Wrong! My number is smaller." << endl << endl;
             upper_bound--;
         }
         else if (guess < rand_ans && guess == lower_bound) {
-            cout << "Wrong! My number is bigger." << endl;
+            cout << "Wrong! My number is bigger." << endl << endl;
             lower_bound++;
         }
 
-        else if (guess > rand_ans && guess <= upper_bound) {
-            cout << "Wrong! My number is smaller." << endl;
-            upper_bound = guess;
+        else if (guess > rand_ans && guess < upper_bound) {
+            cout << "Wrong! My number is smaller." << endl << endl;
+            upper_bound = (guess - 1);
         }
-        else if (guess < rand_ans && guess >= lower_bound) {
-            cout << "Wrong! My number is bigger." << endl;
-            lower_bound = guess;
+        else if (guess < rand_ans && guess > lower_bound) {
+            cout << "Wrong! My number is bigger." << endl << endl;
+            lower_bound = (guess + 1);
         }
         else if (guess > rand_ans ) {
-            cout << "Wrong! My number is smaller." << endl;
+            cout << "Wrong! My number is smaller." << endl << endl;
 
         }
         else if (guess < rand_ans) {
-            cout << "Wrong! My number is bigger." << endl;
+            cout << "Wrong! My number is bigger." << endl << endl;
 
         }
 
