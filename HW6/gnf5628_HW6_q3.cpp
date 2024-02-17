@@ -22,11 +22,11 @@ double eApprox(int n) {
     double sum = 1; // e stars with 1
 
     //builds the outer addend loop
-    for (int addened = 0; addened < n; addened++){
-        int temp_denom = 0;
+    for (int addened = 1; addened <= n; addened++){
+        int temp_denom = 1;
         //builds the factoral for the denominator
         for (int den = 1; den <= addened; den++) {
-            temp_denom += den;
+            temp_denom *= den;
         }
         sum += 1.0/temp_denom;
     }
