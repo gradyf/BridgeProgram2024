@@ -9,7 +9,7 @@ void printDivisors(int num);
 
 int main() {
 
-    double input;
+    int input;
 
     cout << "Please enter a positive integer >= 2: ";
     cin >> input;
@@ -20,9 +20,14 @@ int main() {
 
 void printDivisors(int num) {
 
-    for(int x = 1; x <= num; x++){
+    for(int x = 1; x <= sqrt((double) num); x++){
         if (num % x == 0) {
             cout << x << " ";
+        }
+    }
+    for(int x = sqrt((double) num) - 1; x >= 1; x--){
+        if (num % x == 0) {
+            cout << num / x << " ";
         }
     }
 

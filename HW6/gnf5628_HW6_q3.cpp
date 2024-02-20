@@ -17,19 +17,14 @@ int main () {
     return 0;
 }
 
-//This Function returns e calculated at the n+1 addends
 double eApprox(int n) {
-    double sum = 1; // e stars with 1
+    double fraction = 0.0;
 
-    //builds the outer addend loop
-    for (int addened = 1; addened <= n; addened++){
-        int temp_denom = 1;
-        //builds the factoral for the denominator
-        for (int den = 1; den <= addened; den++) {
-            temp_denom *= den;
-        }
-        sum += 1.0/temp_denom;
+    while (n > 1) {
+        fraction += 1;
+        fraction /= n;
+        n--;
     }
 
-    return sum;
+    return fraction + 2;
 }
