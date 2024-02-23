@@ -26,6 +26,7 @@ void printDivisors(int num) {
         }
     }
     for(int x = sqrt((double) num) - 1; x >= 1; x--){
+
         if (num % x == 0) {
             cout << num / x << " ";
         }
