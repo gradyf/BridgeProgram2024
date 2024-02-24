@@ -44,7 +44,7 @@ int printMonthCalendar(int numOfDays, int startingDay) {
     //weeks
     for (int c = 0; c < 7; c++) {
 
-        if(c == 0 && startingDay < 7) {
+        if(c == 0 && startingDay < 8) {
             for(int x = 1; x < startingDay; x++) {
                 cout<< "\t";
 
@@ -57,11 +57,10 @@ int printMonthCalendar(int numOfDays, int startingDay) {
             if (day > numOfDays) {
                 break;
             }
+
             cout << day << "\t";
             day++;
             lastDay = r+1;
-
-
 
         }
         if (day > numOfDays) {
@@ -92,7 +91,6 @@ bool leapYear(int year) {
 void printYearCalendar(int year, int startingDay) {
 
     int numberOfDays;
-
 
     for(int month = 1; month <=12; month++) {
 
