@@ -24,14 +24,45 @@ This functions is given positive integer num (≥ 2),
  and determines if it is perfect number or not.
 */
 
- int main() {
+void testingFunction (int num);
 
+
+int main() {
+//    testingFunction (28);
+
+    int input;
+
+    cout << "Please enter an input: ";
+
+    cin >> input;
+
+    for (int x = 2; x <= input; x++) {
+
+        if(isPerfect(x)) {
+            cout << x << endl;
+        }
+
+    }
+
+    for (int x = 2; x <= input; x++) {
+        int tempSumDivisors = 0;
+        int tempCountDivisors = 0;
+
+        int tempSumDivisors_pair = 0;
+        int tempCountDivisors_pair = 0;
+
+        analyzeDividors(x, tempCountDivisors, tempSumDivisors);
+        analyzeDividors(tempSumDivisors, tempCountDivisors_pair, tempSumDivisors_pair);
+
+        if (!isPerfect(x) &&(tempSumDivisors_pair == x )) {
+            cout << x << endl;
+        }
+    }
+}
+
+void testingFunction (int num) {
     int outCountDivs = 0;
     int outSumDivs = 0;
-    int num;
-
-    cout << "Please enter a number: " << endl;
-    cin >> num;
 
     cout << "We are looking at the number: " << num << endl;
 
@@ -48,7 +79,6 @@ This functions is given positive integer num (≥ 2),
     }
 
 }
-
 
 void analyzeDividors(int num, int& outCountDivs, int& outSumDivs) {
 
