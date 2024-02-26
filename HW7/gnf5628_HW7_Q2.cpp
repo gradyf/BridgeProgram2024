@@ -28,7 +28,6 @@ void testingFunction (int num);
 
 
 int main() {
-//    testingFunction (28);
 
     int input;
 
@@ -36,6 +35,7 @@ int main() {
 
     cin >> input;
 
+    cout << endl << "Perfect Numbers: " << endl;
     for (int x = 2; x <= input; x++) {
 
         if(isPerfect(x)) {
@@ -44,7 +44,9 @@ int main() {
 
     }
 
+    cout << endl << "Amicable Numbers: " << endl;
     for (int x = 2; x <= input; x++) {
+
         int tempSumDivisors = 0;
         int tempCountDivisors = 0;
 
@@ -55,7 +57,12 @@ int main() {
         analyzeDividors(tempSumDivisors, tempCountDivisors_pair, tempSumDivisors_pair);
 
         if (!isPerfect(x) &&(tempSumDivisors_pair == x )) {
-            cout << x << endl;
+
+            if (tempSumDivisors_pair < tempSumDivisors) {
+                cout << "(" << tempSumDivisors_pair << "," << tempSumDivisors << ")" << endl;
+
+            }
+
         }
     }
 }
