@@ -34,6 +34,8 @@ int main() {
 //    splitParity(arr3, arr3Size);
 //    printArray(arr3, arr3Size);
 
+    cout << endl << "-----SAMPLE ARRAYS------"  << endl;
+
     cout << endl << "Reversing =, Array 4: " << endl;
     int arr4[10] = {9, 2, 14, 12, -3, 8};
     int arr4Size = 6;
@@ -49,6 +51,31 @@ int main() {
     printArray(arr5, arr5Size);
     reverseArray(arr5, arr5Size);
     printArray(arr5, arr5Size);
+
+    cout << endl << "removing: Array 6: " << endl;
+    int arr6[10] = {9, 2, 14, 12, -3, 8,56};
+    int arr6Size = 7;
+
+    printArray(arr6, arr6Size);
+    removeOdd(arr6, arr6Size);
+    printArray(arr6, arr6Size);
+
+
+    cout << endl << "removing: Array 7: " << endl;
+    int arr7[10] = {9, 2, 7, 6, -3, 8,57};
+    int arr7Size = 7;
+
+    printArray(arr7, arr7Size);
+    removeOdd(arr7, arr7Size);
+    printArray(arr7, arr7Size);
+
+    cout << endl << "removing: Array 8: " << endl;
+    int arr8[10] = {2, 9, 9, 9, -9, 8,57};
+    int arr8Size = 7;
+
+    printArray(arr8, arr8Size);
+    removeOdd(arr8, arr8Size);
+    printArray(arr8, arr8Size);
 
 
 
@@ -79,10 +106,33 @@ void reverseArray(int arr[], int arrSize) {
 }
 
 void removeOdd(int arr[], int& arrSize) {
+    int sizeRemove = 0;
     for(int x = 0; x < arrSize; x++) {
         if(arr[x] % 2 != 0) {
-            cout << arr[x] << endl;
+            arr[x] = 0;
+            sizeRemove++;
+        }
+    }
+    for (int x = 0; x < arrSize; x++) {
+        int temp;
+        if(arr[x] == 0 and arr[x+1] != 0) {
+            arr[x] = arr[x+1];
+            arr[x+1] = 0;
+        }
+    }
+    for (int x = 0; x < arrSize; x++) {
+        int tempZeroIndice;
+        if(arr[x] == 0 and arr[x+1] != 0) {
+            arr[x] = arr[x+1];
+            arr[x+1] = 0;
+        }
+        else if(arr[x] == 0 and arr[x+1] == 0) {
+            tempZeroIndice = x;
+        }
+        else if (arr[x] != 0 and arr[x-1]==0) {
+            arr[tempZeroIndice] = arr[x];
         }
     }
 
+//    arrSize -= sizeRemove;
 }
