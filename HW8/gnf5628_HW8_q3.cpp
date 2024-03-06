@@ -7,6 +7,7 @@
 void reverseArray(int arr[], int arrSize);
 void printArray(int arr[], int arrSize);
 void removeOdd(int arr[], int& arrSize);
+void splitParity(int arr[], int arrSize);
 
 using namespace std;
 int main() {
@@ -29,10 +30,10 @@ int main() {
     removeOdd(arr2, arr2Size);
     printArray(arr2, arr2Size);
 
-//    cout << endl << "Split Parity, Array 3: "  << endl;
-//    printArray(arr3, arr3Size);
-//    splitParity(arr3, arr3Size);
-//    printArray(arr3, arr3Size);
+    cout << endl << "Split Parity, Array 3: "  << endl;
+    printArray(arr3, arr3Size);
+    splitParity(arr3, arr3Size);
+    printArray(arr3, arr3Size);
 
     cout << endl << "-----SAMPLE ARRAYS------"  << endl;
 
@@ -78,6 +79,15 @@ int main() {
     printArray(arr8, arr8Size);
 
 
+    cout << endl << "Split: Array 8: " << endl;
+    int arr9[10] = {6, 9, 4, 13, -10, 1,57};
+    int arr9Size = 7;
+
+    printArray(arr9, arr9Size);
+    splitParity(arr9, arr9Size);
+    printArray(arr9, arr9Size);
+
+
 
     return 0;
 }
@@ -106,33 +116,34 @@ void reverseArray(int arr[], int arrSize) {
 }
 
 void removeOdd(int arr[], int& arrSize) {
-    int sizeRemove = 0;
+    int ind = 0;
     for(int x = 0; x < arrSize; x++) {
-        if(arr[x] % 2 != 0) {
-            arr[x] = 0;
-            sizeRemove++;
+        if (arr[x] % 2 == 0) {
+            arr[ind] = arr[x];
+            ind++;
         }
     }
-    for (int x = 0; x < arrSize; x++) {
-        int temp;
-        if(arr[x] == 0 and arr[x+1] != 0) {
-            arr[x] = arr[x+1];
-            arr[x+1] = 0;
+    arrSize = ind;
+}
+
+void splitParity(int arr[], int arrSize) {
+    int left = 0;
+    int right = arrSize - 1;
+    int temp;
+
+    while(left < right) {
+        if (arr[left] % 2 != 0) {
+            left++;
         }
-    }
-    for (int x = 0; x < arrSize; x++) {
-        int tempZeroIndice;
-        if(arr[x] == 0 and arr[x+1] != 0) {
-            arr[x] = arr[x+1];
-            arr[x+1] = 0;
+        else if (arr[right] % 2 == 0) {
+            right--;
         }
-        else if(arr[x] == 0 and arr[x+1] == 0) {
-            tempZeroIndice = x;
-        }
-        else if (arr[x] != 0 and arr[x-1]==0) {
-            arr[tempZeroIndice] = arr[x];
-        }
+
+        temp = arr[left];
+        arr[left] = arr[right];
+        arr[right] = temp;
     }
 
-//    arrSize -= sizeRemove;
 }
+
+
