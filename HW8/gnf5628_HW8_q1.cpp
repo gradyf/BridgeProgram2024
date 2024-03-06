@@ -19,12 +19,9 @@ int main() {
 
     int minimum = minInArray(input, arraySize);
 
-    cout << "Here is the array you entered: ";
-    for(int x = 0; x < arraySize; x++) {
-        cout << input[x] << " ";
-    }
-    cout << endl << "The minimum value is " << minimum
-    << " and it is located at the following indices: ";
+
+    cout << "The minimum value is " << minimum
+    << ", and it is located at the following indices: ";
 
     printIndices(input,arraySize, minimum);
 
@@ -47,7 +44,7 @@ int minInArray(int arr[], int arraySize) {
 }
 
 void fillArray(int arr[], int arraySize){
-    cout << "Please enter " << arraySize << " integers seperated by a space: ";
+    cout << "Please enter " << arraySize << " integers seperated by a space: " << endl;
     for (int x = 0; x < arraySize; x+= 1) {
         cin >> arr[x];
     }
