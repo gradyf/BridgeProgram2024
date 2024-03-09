@@ -70,7 +70,11 @@ int countWords(string str1) {
 
     for (int x = 1; x < str1.length(); x++) {
 
-        if((!isLetter(str1[x]) && (isLetter(str1[x-1])))){
+        if ((x == str1.length()-1) && (isLetter(str1[x]))) {
+            words++;
+        }
+
+        else if((!isLetter(str1[x]) && (isLetter(str1[x-1])))){
 
             words++;
         }
