@@ -7,7 +7,7 @@ using namespace std;
 void printArray (string str, int arr[]);
 string intToString (int num);
 
-const string PIN_NUMBER = "00001";
+const string PIN_NUMBER = "01234";
 
 int main() {
 
