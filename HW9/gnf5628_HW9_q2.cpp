@@ -3,14 +3,50 @@
 //
 
 #include <iostream>
+#include <string>
 
 using namespace std;
 
 bool isLetter(char character);
-
+bool equalArray(int arr1[], int arr2[], int arrSize);
 int letterToIndice(char letter);
+void fillArrayZeros(int arr[], int arrSize);
+void countLetters(string str, int arr[]);
 
 int main() {
+
+    int arrSize = 26;
+
+    int arr1[26];
+    int arr2[26];
+
+    fillArrayZeros(arr1,26);
+    fillArrayZeros(arr2,26);
+
+    string str1;
+    string str2;
+
+    cout << "Please enter the first string: " << endl;
+    getline(cin,str1);
+
+    cout << "Please enter the second string: " << endl;
+    getline(cin,str2);
+
+    countLetters(str1,arr1);
+    countLetters(str2,arr2);
+
+    if(equalArray(arr1, arr2, arrSize)) {
+        cout << "These strings are anagrams!";
+    }
+    else {
+        cout << "These strings are NOT anagrams :(";
+    }
+
+
+
+
+
+
 
    return 0;
 }
@@ -47,4 +83,32 @@ int letterToIndice(char letter) {
         return int (letter) - 97;
     }
 
+}
+
+void fillArrayZeros(int arr[], int arrSize) {
+    for (int x = 0; x < arrSize; x++) {
+        arr[x] = 0;
+    }
+}
+
+void countLetters(string str, int arr[]) {
+
+    for (int x = 0; x < str.length(); x++) {
+        if (isLetter(str[x])) {
+            arr[letterToIndice(str[x])] += 1;
+        }
+    }
+}
+
+bool equalArray(int arr1[], int arr2[], int arrSize) {
+    bool equal = true;
+
+    for (int x = 0; x < arrSize; x++) {
+        if (arr1[x] != arr2[x]) {
+            equal = false;
+            break;
+        }
+    }
+
+    return equal;
 }
