@@ -25,7 +25,7 @@ int main() {
 
     int arr1input[] = {3,-1,-3,0,6,4, 10, 20, -8, 1};
 
-    cout << "Old Array:";
+    cout << "Old Array: ";
     for (int x = 0; x < arr1InputSize; x++) {
         cout << arr1input[x] << " ";
     }
@@ -35,7 +35,7 @@ int main() {
 
     int* arr1Test = getPosNums1(arr1input,arr1InputSize,outPosArr1Size);
 
-    cout << "New Array:";
+    cout << "New Array: ";
     for (int x = 0; x < outPosArr1Size; x++) {
         cout << arr1Test[x] << " ";
     }
@@ -48,19 +48,13 @@ int main() {
     int outPosArr2Size = 0;
     int arr2InputSize = 10;
 
-    cout << "outPosArr2Size: " << outPosArr2Size << endl;
-
     int *outPosArr2SizePtr = &outPosArr2Size;
-
-    cout << "outPosArr2Size: " << outPosArr2Size << endl;
-
 
 
     int arr2input[] = {-8,-2,15,3,9,-7, 0, 0, 3, 1};
 
-    cout << "outPosArr2Size: " << outPosArr2Size << endl;
 
-    cout << "Old Array:";
+    cout << "Old Array: ";
     for (int x = 0; x < arr2InputSize; x++) {
         cout << arr2input[x] << " ";
     }
@@ -69,9 +63,8 @@ int main() {
 
     int* arr2Test = getPosNums2(arr2input, arr2InputSize, outPosArr2SizePtr);
 
-    cout << "outPosArr2Size: " << outPosArr2Size << endl;
 
-    cout << "New Array:";
+    cout << "New Array: ";
     for (int x = 0; x < outPosArr2Size; x++) {
         cout << arr2Test[x] << " ";
     }
@@ -135,9 +128,8 @@ and updates the output parameter
         }
     }
 
-    cout << "New size: " << temp << endl;
 
-    outPosArrSizePtr = &temp;
+    *outPosArrSizePtr = temp;
 
 
     //define the pointer //create new array based on the new size
