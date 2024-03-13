@@ -82,28 +82,30 @@ int main() {
 
     int* outPos3Arr = arr3Test;
 
-
-    cout << endl << "outPosArr3Size: " << outPosArr3Size << endl;
-
-    cout << "Old Array: ";
+    cout << "Old Array: " << endl;
     for (int x = 0; x < arr3InputSize; x++) {
         cout << arr3input[x] << " ";
     }
 
     cout << endl;
 
-    getPosNums3(arr3input, arr3InputSize, outPos3Arr, outPosArr3Size);
-
-    arr3Test = *outPos3Arr;
-
-    cout << endl << "outPosArr3Size: " << outPosArr3Size << endl;
-
-    cout << "New Array: ";
-    for (int x = 0; x < outPosArr3Size; x++) {
-        cout << arr3Test[x] << " ";
+    cout << endl << "Old outPos3Arr: " << endl;
+    for (int x = 0; x < 5; x++) {
+        cout << outPos3Arr[x] << " ";
     }
 
-//    delete [] arr3Test;
+    cout << endl;
+
+    getPosNums3(arr3input, arr3InputSize, outPos3Arr, outPosArr3Size);
+
+    cout << endl;
+
+    cout << "New outPos3Arr: ";
+    for (int x = 0; x < outPosArr3Size; x++) {
+        cout << outPos3Arr[x] << " ";
+    }
+
+    cout << endl << "---------------Function4 Test--------------" << endl;
 
 }
 
@@ -223,6 +225,7 @@ void getPosNums3(int* arr, int arrSize, int* &outPosArr, int &outPosArrSize) {
     }
 
     outPosArr = arr3;
+
 
 }
 
