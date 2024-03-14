@@ -107,6 +107,40 @@ int main() {
 
     cout << endl << "---------------Function4 Test--------------" << endl;
 
+    int outPosArr4Size = 0;
+    int arr4InputSize = 8;
+
+    int arr4input[] = {-8,0,-7,3,0,20, 9, -17};
+
+    int arr4Test[] = {10,9,8,7,6};
+
+    int* outPos4Arr = arr4Test;
+
+    int* outPosArr4SizePtr = &outPosArr4Size;
+
+    cout << "Old Array: " << endl;
+    for (int x = 0; x < arr4InputSize; x++) {
+        cout << arr4input[x] << " ";
+    }
+
+    cout << endl;
+
+    cout << endl << "Old outPos3Arr: " << endl;
+    for (int x = 0; x < 5; x++) {
+        cout << outPos4Arr[x] << " ";
+    }
+
+    cout << endl;
+
+    getPosNums4(arr4input, arr4InputSize, outPos4Arr, outPosArr4SizePtr);
+
+    cout << endl;
+
+    cout << "New outPos3Arr: ";
+    for (int x = 0; x < outPosArr4Size; x++) {
+        cout << outPos4Arr[x] << " ";
+    }
+
 }
 
 
