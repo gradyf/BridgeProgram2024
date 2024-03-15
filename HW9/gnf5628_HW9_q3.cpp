@@ -147,8 +147,6 @@ int main() {
 
     cout << endl << "New outPosArr4Size: " << outPosArr4Size << endl;
 
-
-
 }
 
 
@@ -267,7 +265,6 @@ void getPosNums3(int* arr, int arrSize, int* &outPosArr, int &outPosArrSize) {
     }
 
     outPosArr = arr3;
-
 
 }
 
