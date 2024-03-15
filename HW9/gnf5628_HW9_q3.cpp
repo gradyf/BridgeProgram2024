@@ -1,7 +1,3 @@
-//
-// Created by Gray Forrester on 3/9/24.
-//
-
 #include <iostream>
 
 using namespace std;
