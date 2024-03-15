@@ -78,7 +78,7 @@ int main() {
 
     int arr3input[] = {-7,2,67,-19,0,0, 0, 0, 3, 5, 6, 7, 0, 15, -25};
 
-    int arr3Test[] = {10,9,8,7,6};
+    int arr3Test[] = {0,0,0,0,0};
 
     int* outPos3Arr = arr3Test;
 
@@ -112,7 +112,7 @@ int main() {
 
     int arr4input[] = {-8,0,-7,3,0,20, 9, -17};
 
-    int arr4Test[] = {10,9,8,7,6};
+    int arr4Test[] = {0,0,0,0,0};
 
     int* outPos4Arr = arr4Test;
 
@@ -125,21 +125,29 @@ int main() {
 
     cout << endl;
 
-    cout << endl << "Old outPos3Arr: " << endl;
+    cout << endl << "Old outPos4Arr: " << endl;
     for (int x = 0; x < 5; x++) {
         cout << outPos4Arr[x] << " ";
     }
 
     cout << endl;
 
-    getPosNums4(arr4input, arr4InputSize, outPos4Arr, outPosArr4SizePtr);
+    cout << endl << "Old outPosArr4Size: " << outPosArr4Size << endl;
+
+    getPosNums4(arr4input, arr4InputSize, &outPos4Arr, outPosArr4SizePtr);
 
     cout << endl;
 
-    cout << "New outPos3Arr: ";
+    cout << "New outPos4Arr: ";
     for (int x = 0; x < outPosArr4Size; x++) {
         cout << outPos4Arr[x] << " ";
     }
+
+    cout << endl;
+
+    cout << endl << "New outPosArr4Size: " << outPosArr4Size << endl;
+
+
 
 }
 
@@ -275,8 +283,31 @@ void getPosNums3(int* arr, int arrSize, int* &outPosArr, int &outPosArrSize) {
  * @param outPosArrSizePtr
  */
 
-void getPosNums4(int* arr, int arrSize,
-                 int** outPosArrPtr, int* outPosArrSizePtr) {
+void getPosNums4(int* arr, int arrSize, int** outPosArrPtr, int* outPosArrSizePtr) {
+// determine how large the new size needs to be
+    int temp = 0;
+    for (int x = 0; x < arrSize; x++) {
+        if (arr[x] > 0) {
+            temp++;
+        }
+    }
 
+    *outPosArrSizePtr = temp;
+
+    //define the pointer //create new array based on the new size
+    int* arr4 = new int [*outPosArrSizePtr];
+
+    //create a index tracker for the new array to be used to fill the new array
+    int indTracker = 0;
+
+    //Fills the  new array with the positive values:
+    for (int x = 0; x < arrSize; x++) {
+        if (arr[x] > 0) {
+            arr4[indTracker] = arr[x];
+            indTracker++;
+        }
+    }
+
+    *outPosArrPtr = arr4;
 
 }
