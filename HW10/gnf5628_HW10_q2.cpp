@@ -1,6 +1,4 @@
-//
-// Created by Gray Forrester on 3/16/24.
-//
+
 
 #include <iostream>
 
