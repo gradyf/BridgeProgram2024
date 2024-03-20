@@ -9,6 +9,7 @@
 using namespace std;
 
 void main1(vector<int> &vect, int search);
+void expandArray(int arr[], int &arrSize, int input);
 void main2(int arr[], int arrSize, int search);
 
 int main(){
@@ -30,6 +31,7 @@ int main(){
         }
 
         numVect.push_back(input);
+//        expandArray(numArr, arrSize, input);
 
     }
 
@@ -37,7 +39,7 @@ int main(){
     cin >> search;
 
     main1(numVect, search);
-    main2(numArr, arrSize, search);
+//    main2(numArr, arrSize, search);
 
 }
 
@@ -51,8 +53,8 @@ void main1(vector<int> &vect, int search) {
         }
     }
 
-    for (int x = 0; x < output.size(); x++) {
-        if (output[x] == search) {
+    for (int x = 0; x < vect.size(); x++) {
+        if (vect[x] == search) {
             inList = true;
         }
     }
@@ -71,23 +73,30 @@ void main1(vector<int> &vect, int search) {
         cout << search << " is not in the list.";
     }
 
-
 }
 
+void expandArray(int arr[], int &arrSize, int input) {
+    int arrTemp[arrSize + 1];
+
+    for (int x = 0; x < arrSize; x++) {
+        arrTemp[x] = arr[x];
+    }
+
+    arrSize++;
+
+    arrTemp[arrSize] = input;
+
+//    for (int x = 0; x < arrSize; x++) {
+//        arr[x] = arrTemp[x];
+//    }
 
 
+}
 
 void main2(int arr[], int arrSize, int search) {
 
-    string output;
-
-    for (int x = 0; x < arrSize; x++) {
-        if (arr[x] == search) {
-            output += to_string(x+1);
-        }
-    }
-
-//    cout <<  search << " shows in lines " << output;
 
 
 }
+
+
