@@ -8,8 +8,6 @@
 
 using namespace std;
 
-
-
 void main1(vector<int> &vect, int search);
 void main2(int arr[], int arrSize, int search);
 
@@ -33,7 +31,6 @@ int main(){
 
         numVect.push_back(input);
 
-
     }
 
     cout << "Please enter a number you want to search." << endl;
@@ -41,7 +38,6 @@ int main(){
 
     main1(numVect, search);
     main2(numArr, arrSize, search);
-
 
 }
 
@@ -60,9 +56,6 @@ void main1(vector<int> &vect, int search) {
             inList = true;
         }
     }
-
-
-
 
     if (inList) {
         cout << search << " shows in lines ";
