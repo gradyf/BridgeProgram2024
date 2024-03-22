@@ -9,7 +9,7 @@ string* createWordsArray(string sentence, int& outWordsArrSize);
 bool isLetter(char character);
 
 int main() {
-    int sentsize = 0;
+    int outWordsArrSize = 0;
 
     string sentence;
 
@@ -17,17 +17,24 @@ int main() {
 
     getline(cin, sentence);
 
-    string* strArr = createWordsArray(sentence, sentsize);
+    string* strArr = createWordsArray(sentence, outWordsArrSize);
 
-    cout << "sentsize: " << sentsize << endl;
+    cout << "outWordsArrSize: " << outWordsArrSize << endl;
 
     cout << "Sentence: " << sentence << endl;
 
     cout << "Sentence Array: " << endl;
 
-    for (int x = 0; x < sentsize; x++) {
-        cout << strArr[x] << " ";
+    cout << "[";
+    for (int x = 0; x < outWordsArrSize; x++) {
+        if (x == outWordsArrSize - 1) {
+            cout << "\"" << strArr[x] << "\"";
+        }
+        else {
+            cout << "\"" << strArr[x] << "\",";
+        }
     }
+    cout << "]";
 
     delete[] strArr;
 
