@@ -119,7 +119,7 @@ void searchArray(int arr[], int arrSize, int search) {
             if (x == index - 1) {
                 cout << output[x] + 1 << ".";
             } else {
-                cout << output[x] + 1<< ", ";
+                cout << output[x] + 1 << ", ";
             }
         }
     }
