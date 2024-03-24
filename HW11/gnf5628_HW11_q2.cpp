@@ -1,127 +1,38 @@
 #include <iostream>
+#include <cassert>
 
 
 using namespace std;
 
 int sumOfSquares(int arr[], int arrSize);
 bool isSorted(int arr[], int arrSize);
+void testIsSorted();
+
 
 int main() {
 
-    cout << endl << " --------- isSorted Test ---------" << endl;
+//    testIsSorted();
 
-    int arr1[] = {1,3};
-    int arr1size = 2;
+    int arr1[] = {1,-1,5,-3,8,9};
+    int arr1size = 6;
 
-    cout << "Arr1[] is: ";
+    cout << "arr1 is: ";
     for (int x = 0; x < arr1size; x++) {
         cout << arr1[x] << " ";
     }
 
-    if (isSorted(arr1,arr1size)) {
-        cout << endl <<  "Arr1 is sorted!" << endl << endl;
-    }
-    else {
-        cout << endl << "Arr1 is not sorted!" << endl << endl;
-    }
-
-    int arr2[] = {3,2,1};
-    int arr2size = 3;
-    cout << "Arr2[] is: ";
-    for (int x = 0; x < arr2size; x++) {
-        cout << arr2[x] << " ";
-    }
-
-    if (isSorted(arr2,arr2size)) {
-        cout << endl<< "Arr2 is sorted!" << endl << endl;
-    }
-    else {
-        cout << endl << "Arr2 is not sorted!" << endl << endl;
-    }
-
-    int arr3[] = {2};
-    int arr3size = 1;
-    cout << "Arr3[] is: ";
-    for (int x = 0; x < arr3size; x++) {
-        cout << arr3[x] << " ";
-    }
-
-    if (isSorted(arr3,arr3size)) {
-        cout << endl << "Arr3 is sorted!" << endl << endl;
-    }
-    else {
-        cout << endl <<  "Arr3 is not sorted!" << endl << endl;
-    }
-
-    int arr4[] = {-1};
-    int arr4size = 1;
-    cout << "Arr4[] is: ";
-    for (int x = 0; x < arr4size; x++) {
-        cout << arr4[x] << " ";
-    }
-
-    if (isSorted(arr4,arr4size)) {
-        cout << endl << "Arr4 is sorted!" << endl << endl;
-    }
-    else {
-        cout << endl <<  "Arr4 is not sorted!" << endl << endl;
-    }
-
-    int arr5[] = {-1, 1, 1, 5, 7, 8, 10, 11};
-    int arr5size = 8;
-    cout << "Arr5[] is: ";
-    for (int x = 0; x < arr5size; x++) {
-        cout << arr5[x] << " ";
-    }
-
-    if (isSorted(arr5,arr5size)) {
-        cout << endl << "Arr5 is sorted!" << endl << endl;
-    }
-    else {
-        cout << endl <<  "Arr5 is not sorted!" << endl << endl;
-    }
-
-    int arr6[] = {-1, 5, 5,  -1, 3, 7, 10, 11};
-    int arr6size = 7;
-    cout << "Arr6[] is: ";
-    for (int x = 0; x < arr6size; x++) {
-        cout << arr6[x] << " ";
-    }
-
-    if (isSorted(arr6,arr6size)) {
-        cout << endl << "Arr6 is sorted!" << endl << endl;
-    }
-    else {
-        cout << endl <<  "Arr6 is not sorted!" << endl << endl;
-    }
+    isSorted(arr1, arr1size) == true
+    ? cout << endl << "arr1 is sorted" << endl
+    : cout << endl << "arr1 is not sorted" << endl;
 
 
-    int arr7[] = {1, 2, 3, 4, 5};
-    int arr8[] = {5, 4, 3, 2, 1};
-    int arr9[] = {1, 2, 2, 3, 4};
-    int arr10[] = {1, 3, 2, 4, 5};
 
-    std::cout << "isSorted(arr1): " << (isSorted(arr7, 5) ? "true" : "false")
-              << " | Expected: true" << std::endl;
-    std::cout << "isSorted(arr2): " << (isSorted(arr8, 5) ? "true" : "false")
-              << " | Expected: false" << std::endl;
-    std::cout << "isSorted(arr3): " << (isSorted(arr9, 5) ? "true" : "false")
-              << " | Expected: true" << std::endl;
-    std::cout << "isSorted(arr4): " << (isSorted(arr10, 5) ? "true" : "false")
-              << " | Expected: false" << std::endl;
     return 0;
-
-
-
-
-
-
-
 }
 
 
 
-
+// complete
 int sumOfSquares(int arr[], int arrSize) {
     if(arrSize == 1) {
         return arr[0] * arr[0];
@@ -149,3 +60,37 @@ bool isSorted(int arr[], int arrSize) {
     }
 
 }
+
+void testIsSorted() {
+    // Test case 1: General case, sorted array
+    int arr1[] = {1, 2, 3, 4};
+    assert(isSorted(arr1, 4) == true);
+
+    // Test case 2: General case, not sorted array
+    int arr2[] = {4, 1, 3, 2};
+    assert(isSorted(arr2, 4) == false);
+
+    // Test case 3: Array with all identical elements
+    int arr3[] = {5, 5, 5};
+    assert(isSorted(arr3, 3) == true);
+
+    // Test case 4: Array with one element
+    int arr4[] = {1};
+    assert(isSorted(arr4, 1) == true);
+
+    // Test case 5: Empty array
+    int arr5[] = {};
+    assert(isSorted(arr5, 0) == true);
+
+    // Test case 6: Array with negative numbers, sorted
+    int arr6[] = {-3, -2, -1, 0};
+    assert(isSorted(arr6, 4) == true);
+
+    // Test case 7: Array with negative numbers, not sorted
+    int arr7[] = {-1, -3, -2, 0};
+    assert(isSorted(arr7, 4) == false);
+
+    std::cout << "All test cases for isSorted passed!" << std::endl;
+}
+
+// You would then call testIsSorted() in your main function

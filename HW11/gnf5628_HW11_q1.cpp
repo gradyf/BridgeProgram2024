@@ -15,9 +15,18 @@ int main() {
 
     cout << endl;
 
-    printTriangle(4);
+    printOppositeTriangles(4);
+
+    cout << endl;
+
+    printTriangle(5);
+
+    cout << endl;
+
+    printOppositeTriangles(5);
 }
 
+// complete
 void printTriangle(int n) {
 
     if (n == 1 ) {
@@ -34,34 +43,27 @@ void printTriangle(int n) {
         cout<< endl;
     }
 
-
 }
 
+
 void printOppositeTriangles(int n) {
-
+    bool increase = false;
     if (n == 1 ) {
-        cout << "*";
-        return;
+        cout << "*" << endl;
+        increase = true;
     }
-    else {
 
+    if (!increase) {
         for (int x = 0; x < n; x++) {
             cout << "*";
         }
         cout << endl;
-
-        printTriangle(n - 1);
+        printOppositeTriangles(n - 1);
     }
-
 
     else {
-        printTriangle(n-1);
-        for (int x = 0; x < n; x++) {
-            cout << "*";
-        }
-        cout<< endl;
-    }
 
+    }
 
 
 }
