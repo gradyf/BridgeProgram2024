@@ -7,23 +7,28 @@ using namespace std;
 
 void printTriangle(int n);
 void printOppositeTriangles(int n);
+void printRuler (int n);
 
 
 int main() {
 
-    printTriangle(4);
+//    printTriangle(4);
 
-    cout << endl;
+//    cout << endl;
 
-    printOppositeTriangles(4);
+//    printOppositeTriangles(4);
 
-    cout << endl;
+//    cout << endl;
 
-    printTriangle(5);
+//    printTriangle(5);
 
-    cout << endl;
+//    cout << endl;
 
-    printOppositeTriangles(5);
+//    printOppositeTriangles(5);
+
+//    cout << endl;
+
+    printRuler(4);
 }
 
 // complete
@@ -44,26 +49,46 @@ void printTriangle(int n) {
     }
 
 }
-
-
+// complete
 void printOppositeTriangles(int n) {
-    bool increase = false;
     if (n == 1 ) {
-        cout << "*" << endl;
-        increase = true;
-    }
-
-    if (!increase) {
-        for (int x = 0; x < n; x++) {
-            cout << "*";
-        }
-        cout << endl;
-        printOppositeTriangles(n - 1);
+        cout << "*" << endl << "*" << endl;
     }
 
     else {
 
+        for (int x = 0; x < n; x++) {
+            cout << "*";
+        }
+        cout << endl;
+
+        printOppositeTriangles(n - 1);
+
+        for (int x = 0; x < n; x++) {
+            cout << "*";
+        }
+        cout << endl;
     }
+
+
+
+}
+//complete
+void printRuler (int n) {
+    if( n == 1) {
+        cout << "-";
+        cout << endl;
+    }
+    else {
+        printRuler (n - 1);
+        for (int x = 0; x < n; x++) {
+            cout << "-";
+        }
+        cout << endl;
+        printRuler (n - 1);
+
+    }
+
 
 
 }
