@@ -24,11 +24,11 @@ int main() {
 
 //    cout << endl;
 
-//    printOppositeTriangles(5);
+    printOppositeTriangles(5);
 
 //    cout << endl;
 
-    printRuler(4);
+//    printRuler(4);
 }
 
 // complete
@@ -56,6 +56,7 @@ void printOppositeTriangles(int n) {
     }
 
     else {
+
 
         for (int x = 0; x < n; x++) {
             cout << "*";
