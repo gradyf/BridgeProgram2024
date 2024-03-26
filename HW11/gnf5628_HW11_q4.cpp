@@ -30,6 +30,7 @@ int main(){
 
 }
 
+// complete
 int lowestCost(int arr[], int arrSize) {
 
     if (arrSize == 1) {

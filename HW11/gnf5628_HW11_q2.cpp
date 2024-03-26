@@ -9,7 +9,6 @@ bool isSorted(int arr[], int arrSize);
 
 int main() {
 
-
     int arr1[] = {1,-1,5,-3,8,9};
     int arr1size = 6;
 
@@ -96,7 +95,7 @@ int sumOfSquares(int arr[], int arrSize) {
     }
 }
 
-
+//complete
 bool isSorted(int arr[], int arrSize) {
 
     if (arrSize == 1) {
