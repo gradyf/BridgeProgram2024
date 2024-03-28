@@ -12,23 +12,27 @@ void printRuler (int n);
 
 int main() {
 
-//    printTriangle(4);
+    printTriangle(4);
 
-//    cout << endl;
+    cout << endl;
 
-//    printOppositeTriangles(4);
+    printOppositeTriangles(4);
 
-//    cout << endl;
+    cout << endl;
 
-//    printTriangle(5);
+    printTriangle(5);
 
-//    cout << endl;
+    cout << endl;
 
     printOppositeTriangles(5);
 
-//    cout << endl;
+    cout << endl;
 
-//    printRuler(4);
+    printRuler(4);
+    cout << endl;
+
+    printRuler(3);
+
 }
 
 // complete

@@ -20,7 +20,7 @@ int main() {
     cout << endl;
 
     int arr2[6] = {0,6,-1,3,-10,-15};
-    cout <<  minInArray1(arr2, 7); // -10
+    cout <<  minInArray1(arr2, 7);
 
     cout << endl;
 
