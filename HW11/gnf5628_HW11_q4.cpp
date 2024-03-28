@@ -28,6 +28,15 @@ int main(){
 
     cout << "Board5 lowest price: " << lowestCost(board5,1) << endl;
 
+    int board6[] = {0,10,45,40,30,10};
+
+    cout << "Board6 lowest price: " << lowestCost(board6,6) << endl;
+
+    int board7[] = {0,3,80,6,1,10};
+    cout << "INCORRECT: Board 7 lowest price: " << lowestCost(board7,6) << endl;
+
+    int board8[] = {0,10,45,40,30,10};
+    cout << "Board 8 lowest price: " << lowestCost(board8,6) << endl;
 }
 
 // complete
