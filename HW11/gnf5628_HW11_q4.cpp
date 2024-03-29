@@ -55,13 +55,21 @@ int lowestCost(int arr[], int arrSize) {
         int first = *(arr+1);
         int second = *(arr+2);
         if((first * 2 - 1) < second) {
+//            cout << endl <<  "the first number is: " << first << " which is less than " << second << endl;
 
-            int temp = *(arr+1) + lowestCost(arr+1, arrSize -1);
+            int temp = *(arr+1) + lowestCost(arr+1, arrSize - 1);
+
+//            cout << "We will add " << temp << " to the total.";
 
             return temp;
         }
         else {
+
+//            cout << endl<< "the first number is: " << first << " which is more than << " << second << endl;
+
             int temp = *(arr+2) + lowestCost(arr+2, arrSize - 2);
+
+//            cout << "We will add " << temp << " to the total.";
 
             return temp;
         }
