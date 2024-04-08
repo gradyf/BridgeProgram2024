@@ -236,6 +236,8 @@ and updates the output parameter
     */
 void getPosNums3(int* arr, int arrSize, int* &outPosArr, int &outPosArrSize) {
 
+
+
     // determine how large the new size needs to be
     int temp = 0;
     for (int x = 0; x < arrSize; x++) {
