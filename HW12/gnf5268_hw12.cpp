@@ -159,16 +159,18 @@ int main() {
 
     int checkNumber, checkbookSize = 0, depositsSize = 0;
 
-    Money checkAmount, cashedSumAmount, priorBalance, unCashedSumAmount;
+    Money checkAmount, cashedSumAmount, priorBalance, unCashedSumAmount, depositAmount
+    , depositSum = 0, currentBalance, actualBalance;
 
     bool checkStatus;
 
-    Check* checkbook = new Check[checkbookSize];
+    Check *checkbook = new Check[checkbookSize];
 
-    Money* deposits = new Money[depositsSize];
+    Money *deposits = new Money[depositsSize];
 
     cout << "Please enter a check number, amount on the check [Include the dollar sign], and whether or not the " <<
-         "check has been cashed, indicated by a 1(Yes) or 0(No). Enter a 0 for all three when done inputting checks" << endl;
+         "check has been cashed, indicated by a 1(Yes) or 0(No). Enter a 0 for all three when done inputting checks"
+         << endl;
 
     while (true) {
         cin >> checkNumber >> checkAmount >> checkStatus;
@@ -178,7 +180,7 @@ int main() {
         }
         checkbookSize++;
 
-        Check* newCheckbook = new Check[checkbookSize];
+        Check *newCheckbook = new Check[checkbookSize];
 
         for (int x = 0; x < checkbookSize - 1; x++) {
             newCheckbook[x] = checkbook[x];
@@ -189,15 +191,15 @@ int main() {
         newCheckbook[checkbookSize - 1].checkAmount = checkAmount;
         newCheckbook[checkbookSize - 1].checkStatus = checkStatus;
 
-        delete [] checkbook;
+        delete[] checkbook;
         checkbook = newCheckbook;
 
     }
 
     cout << "The sum of the cashed checks is: " << endl;
 
-    for (int i = 0; i < checkbookSize; i++ ) {
-        if(checkbook[i].checkStatus == 1) {
+    for (int i = 0; i < checkbookSize; i++) {
+        if (checkbook[i].checkStatus == 1) {
             cashedSumAmount = cashedSumAmount + checkbook[i].checkAmount;
         }
     }
@@ -206,25 +208,63 @@ int main() {
 
     cout << "The sum of the uncashed checks is: " << endl;
 
-    for (int i = 0; i < checkbookSize; i++ ) {
-        if(checkbook[i].checkStatus == 0) {
+    for (int i = 0; i < checkbookSize; i++) {
+        if (checkbook[i].checkStatus == 0) {
             unCashedSumAmount = unCashedSumAmount + checkbook[i].checkAmount;
         }
     }
 
     cout << unCashedSumAmount << endl;
 
+    cout << "Please enter your deposits (end by entering 0): " << endl;
+
+    while (true) {
+        cin >> depositAmount;
+
+        if (depositAmount == 0) {
+            break;
+        }
+        depositsSize++;
+
+        Money *newDeposits = new Money[depositsSize];
+
+        for (int x = 0; x < depositsSize - 1; x++) {
+            newDeposits[x] = deposits[x];
+        }
+
+        newDeposits[depositsSize - 1] = depositAmount;
+        newDeposits[depositsSize - 1] = depositAmount;
+        newDeposits[depositsSize - 1] = depositAmount;
+
+        delete[] deposits;
+        deposits = newDeposits;
+
+    }
+
+    cout << "The sum of the deposits is: " << endl;
+
+    for (int i = 0; i < depositsSize; i++) {
+        depositSum = depositSum + deposits[i];
+    }
+
+    cout << depositSum << endl;
+
     cout << "Please enter the prior balance amount (Format: $#.##): " << endl;
 
     cin >> priorBalance;
 
+    cout << "Please enter the current balance amount (Format: $#.##): " << endl;
+
+    cin >> currentBalance;
+
+    actualBalance = priorBalance + depositSum - cashedSumAmount;
+
+    cout << "The actual account balance is: " << endl;
+    cout << actualBalance << endl;
+
+    cout << "This is " << actualBalance - currentBalance << " different than the current balance." << endl;
 
 
-
-
-
-
-
-
+    return 0;
 }
 
