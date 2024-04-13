@@ -1,5 +1,4 @@
 #include <iostream>
-#include <vector>
 
 using namespace std;
 
@@ -224,6 +223,19 @@ int main() {
     delete [] cashedBook;
     cashedBook = tempCashedChecks;
 
+    //sorting the cashed Checks book
+    for (int i = 0; i < totalCashedChecks - 1; i++) {
+        for (int j = 0; j < totalCashedChecks - i - 1; j++) {
+            if(cashedBook[j].checkNumber > cashedBook[j+1].checkNumber) {
+                Check temp = cashedBook[j];
+                cashedBook[j] = cashedBook[j+1];
+                cashedBook[j+1] = temp;
+            }
+        }
+    }
+
+
+
 
     //Summing up the **Uncashed Checks** and reporting out the sum
     cout << "The sum of the uncashed checks is: " << endl;
@@ -247,10 +259,19 @@ int main() {
     delete [] uncashedBook;
     uncashedBook = tempUnCashed;
 
+    //sorting the uncashed Checks book
+    for (int i = 0; i < totalUnCashedChecks - 1; i++) {
+        for (int j = 0; j < totalUnCashedChecks - i - 1; j++) {
+            if(uncashedBook[j].checkNumber > uncashedBook[j+1].checkNumber) {
+                Check temp = uncashedBook[j];
+                uncashedBook[j] = uncashedBook[j+1];
+                uncashedBook[j+1] = temp;
+            }
+        }
+    }
 
-
+    //Getting the deposits from the User
     cout << "Please enter your deposits (end by entering 0): " << endl;
-
     while (true) {
         cin >> depositAmount;
 
@@ -274,41 +295,42 @@ int main() {
 
     }
 
+    // Adding up the sum of the deposits and reporting it out
     cout << "The sum of the deposits is: " << endl;
-
     for (int i = 0; i < depositsSize; i++) {
         depositSum = depositSum + deposits[i];
     }
-
     cout << depositSum << endl;
 
+    // Getting the prior Balance amount from the User
     cout << "Please enter the prior balance amount (Format: $#.##): " << endl;
-
     cin >> priorBalance;
 
+    //Getting the current balance amount from the User
     cout << "Please enter the current balance amount (Format: $#.##): " << endl;
-
     cin >> currentBalance;
 
+    //Calculating and printing the actual balance and
     actualBalance = priorBalance + depositSum - cashedSumAmount;
-
     cout << "The actual account balance is: " << endl;
     cout << actualBalance << endl;
 
+    //Reconciling the current vs actual balacne
     cout << "This is " << actualBalance - currentBalance << " different than the current balance." << endl;
 
+    //Printing out the cashed checks
     cout << "The Cashed Checks are: " << endl;
     for (int i = 0; i < totalCashedChecks; i++) {
         cout << "Check Number: " << cashedBook[i].checkNumber <<" with amount: "
         << cashedBook[i].checkAmount << endl;
     }
 
+    // Printing out the uncashed checks
     cout << "The Uncashed Checks are: " << endl;
     for (int i = 0; i < totalUnCashedChecks; i++) {
         cout << "Check Number: " << uncashedBook[i].checkNumber <<" with amount: "
         << uncashedBook[i].checkAmount << endl;
     }
-
 
 
     return 0;
