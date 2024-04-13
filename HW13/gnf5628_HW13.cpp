@@ -1,5 +1,7 @@
 
 #include <iostream>
+#include <string>
+
 using namespace std;
 
 class Organism {
@@ -46,14 +48,47 @@ public:
 private:
 };
 
+void drawBoard() {
 
-
-
+    for (int x = 0; x < 20; x++) {
+        for (int y = 0; y < 20; y++) {
+            cout << " - ";
+        }
+        cout << endl;
+    }
+}
 
 int main() {
+    int step = 0;
 
-    Ant ant1;
+    string input;
+
+    cout << "Step: " << step << endl;
+
+    drawBoard();
+
+    while (true) {
+
+        getline(cin, input);
+
+        if (!input.empty()) {
+            break;
+        }
+        step++;
+
+        for (int x = 0; x < 21; x++){
+            cout << endl;
+        }
+
+        cout << "Step: " << step << endl;
+
+        drawBoard();
 
 
+
+    }
+
+
+    return 0;
 
 }
