@@ -157,7 +157,8 @@ public:
 
 int main() {
 
-    int checkNumber, checkbookSize = 0, depositsSize = 0;
+    int checkNumber, checkbookSize = 0, depositsSize = 0, totalCashedChecks = 0
+            , totalUnCashedChecks = 0;
 
     Money checkAmount, cashedSumAmount, priorBalance, unCashedSumAmount, depositAmount
     , depositSum = 0, currentBalance, actualBalance;
@@ -165,6 +166,8 @@ int main() {
     bool checkStatus;
 
     Check *checkbook = new Check[checkbookSize];
+    Check *uncashedBook = new Check[checkbookSize];
+    Check *cashedBook = new Check[checkbookSize];
 
     Money *deposits = new Money[depositsSize];
 
@@ -172,6 +175,7 @@ int main() {
          "check has been cashed, indicated by a 1(Yes) or 0(No). Enter a 0 for all three when done inputting checks"
          << endl;
 
+    // Getting checks and putting it in the check book
     while (true) {
         cin >> checkNumber >> checkAmount >> checkStatus;
 
@@ -196,25 +200,54 @@ int main() {
 
     }
 
-    cout << "The sum of the cashed checks is: " << endl;
 
+    //summing up the **cashed checks** and reporting it out
+    cout << "The sum of the cashed checks is: " << endl;
     for (int i = 0; i < checkbookSize; i++) {
         if (checkbook[i].checkStatus == 1) {
             cashedSumAmount = cashedSumAmount + checkbook[i].checkAmount;
+            totalCashedChecks++;
         }
     }
-
     cout << cashedSumAmount << endl;
 
-    cout << "The sum of the uncashed checks is: " << endl;
+    //copying over the cashed checks
+    int tempIndex = 0;
+    Check* tempCashedChecks = new Check[totalCashedChecks];
+    for (int i = 0; i < checkbookSize; i++) {
+        if(checkbook[i].checkStatus == 1) {
+            tempCashedChecks[tempIndex] = checkbook[i];
+            tempIndex++;
+        }
 
+    }
+    delete [] cashedBook;
+    cashedBook = tempCashedChecks;
+
+
+    //Summing up the **Uncashed Checks** and reporting out the sum
+    cout << "The sum of the uncashed checks is: " << endl;
     for (int i = 0; i < checkbookSize; i++) {
         if (checkbook[i].checkStatus == 0) {
             unCashedSumAmount = unCashedSumAmount + checkbook[i].checkAmount;
+            totalUnCashedChecks++;
         }
     }
-
     cout << unCashedSumAmount << endl;
+
+    //Copying over the **uncashed checks**
+    tempIndex = 0;
+    Check* tempUnCashed = new Check[totalUnCashedChecks];
+    for (int i = 0; i < checkbookSize; i++) {
+        if(checkbook[i].checkStatus == 0){
+            tempUnCashed[tempIndex] = checkbook[i];
+            tempIndex++;
+        }
+    }
+    delete [] uncashedBook;
+    uncashedBook = tempUnCashed;
+
+
 
     cout << "Please enter your deposits (end by entering 0): " << endl;
 
@@ -263,6 +296,19 @@ int main() {
     cout << actualBalance << endl;
 
     cout << "This is " << actualBalance - currentBalance << " different than the current balance." << endl;
+
+    cout << "The Cashed Checks are: " << endl;
+    for (int i = 0; i < totalCashedChecks; i++) {
+        cout << "Check Number: " << cashedBook[i].checkNumber <<" with amount: "
+        << cashedBook[i].checkAmount << endl;
+    }
+
+    cout << "The Uncashed Checks are: " << endl;
+    for (int i = 0; i < totalUnCashedChecks; i++) {
+        cout << "Check Number: " << uncashedBook[i].checkNumber <<" with amount: "
+        << uncashedBook[i].checkAmount << endl;
+    }
+
 
 
     return 0;
