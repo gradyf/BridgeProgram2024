@@ -131,7 +131,7 @@ void drawBoard(vector<Ant> ants, int numAnts, vector<Doodlebug> bugs, int numBug
 }
 
 bool isFull(vector<Ant> ants, int numAnts, vector<Doodlebug> bugs, int numBugs, int x, int y) {
-    for (int )
+    return false;
 }
 
 int main() {
