@@ -102,37 +102,44 @@ public:
 private:
 };
 
-void drawBoard(vector<Ant> ants, int numAnts, vector<Doodlebug> bugs, int numBugs) {
+class Board {
+public:
 
-    bool printed;
+    void drawBoard(vector<Ant> ants, int numAnts, vector<Doodlebug> bugs, int numBugs) {
 
-    for (int y = 0; y < 20; y++) {
-        for (int x = 0; x < 20; x++) {
-            printed = false;
-            for (int a = 0; a < numAnts; a++) {
-                if (ants[a].xLoc == x && ants[a].yLoc == y) {
-                    cout << " O ";
-                    printed = true;
+        bool printed;
+
+        for (int y = 0; y < 20; y++) {
+            for (int x = 0; x < 20; x++) {
+                printed = false;
+                for (int a = 0; a < numAnts; a++) {
+                    if (ants[a].xLoc == x && ants[a].yLoc == y) {
+                        cout << " O ";
+                        printed = true;
+                    }
+                }
+                for (int b = 0; b < numBugs; b++) {
+                    if (bugs[b].xLoc == x && bugs[b].yLoc == y) {
+                        cout << " X ";
+                        printed = true;
+                    }
+                }
+                if (!printed) {
+                    cout << " - ";
                 }
             }
-            for (int b = 0; b < numBugs; b++) {
-                if (bugs[b].xLoc == x && bugs[b].yLoc == y) {
-                    cout << " X ";
-                    printed = true;
-                }
-            }
-            if (!printed) {
-                cout << " - ";
-            }
+            cout << endl;
+
         }
-        cout << endl;
-
     }
-}
 
-bool isFull(vector<Ant> ants, int numAnts, vector<Doodlebug> bugs, int numBugs, int x, int y) {
-    return false;
-}
+    bool isFull(vector<Ant> ants, int numAnts, vector<Doodlebug> bugs, int numBugs, int x, int y) {
+        return false;
+    }
+
+
+};
+
 
 int main() {
     int step = 0, numAnts = 5, numBugs = 0;
