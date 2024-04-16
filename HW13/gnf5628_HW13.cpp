@@ -40,33 +40,37 @@ public:
 
     void move(vector<int> spaces) {
 
+        if(spaces.size() != 0) {
 
-        int direction = (rand() % spaces.size());
+            int direction = (rand() % spaces.size());
+            //move right
+            if (spaces[direction] == 1) {
+                if (xLoc < 19) {
+                    xLoc++;
+                }
+            }
+                //Move Left
+            else if (spaces[direction] == 2) {
+                if (xLoc > 0) {
+                    xLoc--;
+                }
+            }
+                //Move Up
+            else if (spaces[direction] == 3) {
+                if (yLoc > 0) {
+                    yLoc--;
+                }
+            }
+                //Move down
+            else if (spaces[direction] == 4) {
+                if (yLoc < 19) {
+                    yLoc++;
+                }
+            }
 
-        //move right
-        if (spaces[direction] == 1) {
-            if (xLoc < 19) {
-                xLoc++;
-            }
         }
-            //Move Left
-        else if (spaces[direction] == 2) {
-            if (xLoc > 0) {
-                xLoc--;
-            }
-        }
-            //Move Up
-        else if (spaces[direction] == 3) {
-            if (yLoc > 0) {
-                yLoc--;
-            }
-        }
-            //Move down
-        else if (spaces[direction] == 4) {
-            if (yLoc < 19) {
-                yLoc++;
-            }
-        }
+
+
 
     }
 
@@ -214,7 +218,7 @@ public:
 
     }
 
-    void cleanAnts(vector<Ant> ants, int numAnts) {
+    void cleanAnts(vector<Ant> &ants, int numAnts) {
         bool cont = true;
 
         while (cont) {
@@ -223,7 +227,7 @@ public:
             if (swapped) {
                 swapped = false;
                 for (int x = 0; x < numAnts; x++) {
-                    for (int y = 0; y < numAnts; y++) {
+                    for (int y = x+1; y < numAnts; y++) {
                         if (x != y) {
                             if (ants[x].xLoc == ants[y].xLoc && ants[x].yLoc == ants[y].yLoc) {
                                 ants[x].xLoc++;
@@ -243,7 +247,6 @@ public:
 
     }
 
-
     void cleanBugs(vector<Doodlebug> bugs, int numBugs) {
         bool cont = true;
 
@@ -252,12 +255,12 @@ public:
 
             if (swapped) {
                 swapped = false;
-                for (int x = 0; x < numAnts; x++) {
-                    for (int y = 0; y < numAnts; y++) {
+                for (int x = 0; x < numBugs; x++) {
+                    for (int y = 0; y < numBugs; y++) {
                         if (x != y) {
-                            if (ants[x].xLoc == ants[y].xLoc && ants[x].yLoc == ants[y].yLoc) {
-                                ants[x].xLoc++;
-                                ants[x].yLoc++;
+                            if (bugs[x].xLoc == bugs[y].xLoc && bugs[x].yLoc == bugs[y].yLoc) {
+                                bugs[x].xLoc++;
+                                bugs[x].yLoc++;
                                 swapped = true;
                             }
                         }
@@ -292,42 +295,42 @@ int main() {
         bugs.push_back(Doodlebug());
     }
 
-    for (int a = 0; a < numAnts; a++) {
-        cout << "Ant: " << a + 1 << ", (" << ants[a].xLoc << ", " << ants[a].yLoc << ")" << endl;
-    }
+    playingBoard.cleanAnts(ants,numAnts);
 
-//    string input;
-//
-//    cout << "Step: " << step << endl;
-//
-//    playingBoard.drawBoard(ants, numAnts, bugs, numBugs);
-//
-//    while (true) {
-//
-//        getline(cin, input);
-//
-//        if (!input.empty()) {
-//            break;
-//        }
-//        step++;
-//
-//        for (int x = 0; x < 21; x++) {
-//            cout << endl;
-//        }
-//
-//        cout << "Step: " << step << endl;
-//
-//        playingBoard.drawBoard(ants, numAnts, bugs, numBugs);
-//
-//        for (int a = 0; a < numAnts; a++) {
-//
-//            ants[a].move(playingBoard.legalSpaces(ants, numAnts, bugs, numBugs, ants[a].xLoc, ants[a].yLoc));
-//            ants[a].ageUp();
-//        }
-//
-//
-//
-//    }
+    string input;
+
+    cout << "Step: " << step << endl;
+
+    playingBoard.drawBoard(ants, numAnts, bugs, numBugs);
+
+    while (true) {
+
+        getline(cin, input);
+
+        if (!input.empty()) {
+            break;
+        }
+        step++;
+
+        for (int x = 0; x < 21; x++) {
+            cout << endl;
+        }
+
+        cout << "Step: " << step << endl;
+
+        playingBoard.drawBoard(ants, numAnts, bugs, numBugs);
+
+        for (int a = 0; a < numAnts; a++) {
+
+//            cout << a << endl;
+            ants[a].move(playingBoard.legalSpaces(ants, numAnts, bugs, numBugs, ants[a].xLoc, ants[a].yLoc));
+            ants[a].ageUp();
+
+        }
+
+
+
+    }
 
 
     return 0;
