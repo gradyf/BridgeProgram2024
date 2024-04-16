@@ -27,6 +27,7 @@ private:
 class Ant : public Organism {
 public:
 
+
     Ant(int x, int y) {
 
         age = 0;
@@ -143,8 +144,11 @@ private:
 class Doodlebug : public Organism {
 public:
 
+    int ageEating;
+
     Doodlebug(int x, int y) {
         age = 0;
+        ageEating = 0;
 
         xLoc = x;
         yLoc = y;
@@ -153,6 +157,7 @@ public:
 
     Doodlebug() {
         age = 0;
+        ageEating = 0;
 
         int xLocation = (rand() % 20);
         int yLocation = (rand() % 20);
@@ -162,6 +167,37 @@ public:
     }
 
     void move(vector<int> spaces) {
+
+        if (spaces.size() != 0) {
+
+            int direction = (rand() % spaces.size());
+            //move right
+            if (spaces[direction] == 1) {
+                if (xLoc < 19) {
+                    xLoc++;
+                }
+            }
+                //Move Left
+            else if (spaces[direction] == 2) {
+                if (xLoc > 0) {
+                    xLoc--;
+                }
+            }
+                //Move Up
+            else if (spaces[direction] == 3) {
+                if (yLoc > 0) {
+                    yLoc--;
+                }
+            }
+                //Move down
+            else if (spaces[direction] == 4) {
+                if (yLoc < 19) {
+                    yLoc++;
+                }
+            }
+
+        }
+
 
     }
 
@@ -214,10 +250,19 @@ public:
 
     void starve() {
 
+        if (ageEating >= 8) {
+
+            delete this;
+
+
+        }
+
+
     }
 
     void ageUp() {
         age++;
+        ageEating++;
     }
 
 private:
@@ -260,7 +305,6 @@ public:
         bool left = true; // 2
         bool up = true; // 3
         bool down = true; // 4
-
 
         for (int a = 0; a < numAnts; a++) {
             //check right
@@ -315,9 +359,7 @@ public:
             legalSpaces.push_back(4);
         }
 
-
         return legalSpaces;
-
 
     }
 
@@ -379,7 +421,6 @@ public:
 
     }
 
-
 };
 
 
@@ -388,19 +429,14 @@ int main() {
     srand(time(0));
 
     Board playingBoard;
-    int step = 0, numAnts = 10, numBugs = 5;
+    int step = 0, numAnts = 0, numBugs = 5;
 
-    vector<Ant> ants;
-    for (int a = 0; a < numAnts; a++) {
-        ants.push_back(Ant());
-    }
+    vector<Ant> ants(numAnts);
 
-    vector<Doodlebug> bugs;
-    for (int a = 0; a < numBugs; a++) {
-        bugs.push_back(Doodlebug());
-    }
+    vector<Doodlebug> bugs(numBugs);
 
     playingBoard.cleanAnts(ants, numAnts);
+    playingBoard.cleanBugs(bugs, numBugs);
 
     string input;
 
@@ -430,7 +466,9 @@ int main() {
 
             bugs[b].move(playingBoard.legalSpaces(ants, numAnts, bugs, numBugs, bugs[b].xLoc, bugs[b].yLoc));
             bugs[b].ageUp();
-            bugs[b].breed(playingBoard.legalSpaces(ants, numAnts, bugs, numBugs, bugs[b].xLoc, bugs[b].yLoc),bugs, numBugs);
+            bugs[b].starve();
+            bugs[b].breed(playingBoard.legalSpaces(ants, numAnts, bugs, numBugs, bugs[b].xLoc, bugs[b].yLoc), bugs,
+                          numBugs);
 
 
         }
@@ -440,7 +478,8 @@ int main() {
 
             ants[a].move(playingBoard.legalSpaces(ants, numAnts, bugs, numBugs, ants[a].xLoc, ants[a].yLoc));
             ants[a].ageUp();
-            ants[a].breed(playingBoard.legalSpaces(ants, numAnts, bugs, numBugs, ants[a].xLoc, ants[a].yLoc),ants, numAnts);
+            ants[a].breed(playingBoard.legalSpaces(ants, numAnts, bugs, numBugs, ants[a].xLoc, ants[a].yLoc), ants,
+                          numAnts);
 
 
         }
