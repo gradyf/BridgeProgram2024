@@ -14,7 +14,7 @@ public:
 
     int number;
 
-    virtual void move() = 0;
+//    virtual void move(bool up, bool down, bool left, bool right) = 0;
 
 
 private:
@@ -29,50 +29,53 @@ public:
         age = 0;
 
         // initializing the random guess variable
-        int xLocation = (rand() % 20) ;
-        int yLocation = (rand() % 20) ;
+        int xLocation = (rand() % 20);
+        int yLocation = (rand() % 20);
         xLoc = xLocation;
         yLoc = yLocation;
     }
 
-    void move()  {
-        // initializing the random guess variable
-        int direction = (rand() % 4) + 1;
 
-        //Move right
-        if (direction == 1) {
-            if(xLoc < 19) {
+    void move(vector<int>* spaces) {
+
+        vector<int>& legalSpaces = *spaces;
+
+        int direction = (rand() % legalSpaces.size());
+
+        //move up
+        if (legalSpaces[direction] == 1) {
+            if (xLoc < 19) {
                 xLoc++;
             }
         }
-        //Move Left
-        else if(direction == 2) {
-            if(xLoc > 0) {
-                xLoc--;
+            //Move Left
+        else if (legalSpaces[direction] == 2) {
+            if (xLoc > 0) {
             }
         }
-        //Move Up
-        else if(direction == 3) {
-            if(yLoc > 0){
+            //Move Up
+        else if (legalSpaces[direction] == 3) {
+            if (yLoc > 0) {
                 yLoc--;
             }
         }
-        //Move down
-        else if(direction == 4) {
-            if(yLoc < 19) {
+            //Move down
+        else if (legalSpaces[direction] == 4) {
+            if (yLoc < 19) {
                 yLoc++;
             }
         }
 
     }
 
+
     void breed() {
 
     }
 
 
-
 private:
+
 };
 
 class Doodlebug : public Organism {
@@ -80,14 +83,14 @@ public:
     Doodlebug() {
         age = 0;
 
-        int xLocation = (rand() % 20) ;
-        int yLocation = (rand() % 20) ;
+        int xLocation = (rand() % 20);
+        int yLocation = (rand() % 20);
         xLoc = xLocation;
         yLoc = yLocation;
 
     }
 
-    void move() {
+    void move(bool up, bool down, bool left, bool right) {
 
     }
 
@@ -142,6 +145,8 @@ public:
 
 
 int main() {
+
+    Board playingBoard;
     int step = 0, numAnts = 5, numBugs = 0;
 
     vector<Ant> ants;
@@ -158,7 +163,7 @@ int main() {
 
     cout << "Step: " << step << endl;
 
-    drawBoard(ants, numAnts, bugs, numBugs);
+    playingBoard.drawBoard(ants, numAnts, bugs, numBugs);
 
     while (true) {
 
@@ -175,12 +180,11 @@ int main() {
 
         cout << "Step: " << step << endl;
 
-        drawBoard(ants, numAnts, bugs, numBugs);
+        playingBoard.drawBoard(ants, numAnts, bugs, numBugs);
 
         for (int a = 0; a < numAnts; a++) {
-            ants[a].move();
+//            ants[a].move();
         }
-
 
 
     }
