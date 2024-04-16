@@ -248,15 +248,13 @@ public:
 
     }
 
-    void starve() {
+    bool starve() {
 
         if (ageEating >= 8) {
-
-            delete this;
-
-
+            return true;
+        } else {
+            return false;
         }
-
 
     }
 
