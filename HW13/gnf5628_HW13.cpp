@@ -7,12 +7,13 @@
 
 using namespace std;
 
+
 class Organism {
 public:
 
     int xLoc, yLoc, age;
 
-    int number;
+    static int number;
 
     virtual void move(vector<int> spaces) = 0;
 
@@ -25,6 +26,16 @@ private:
 
 class Ant : public Organism {
 public:
+
+    Ant(int x, int y) {
+
+        age = 0;
+
+        // initializing the random guess variable
+
+        xLoc = x;
+        yLoc = y;
+    }
 
     Ant() {
 
@@ -40,7 +51,7 @@ public:
 
     void move(vector<int> spaces) {
 
-        if(spaces.size() != 0) {
+        if (spaces.size() != 0) {
 
             int direction = (rand() % spaces.size());
             //move right
@@ -71,11 +82,52 @@ public:
         }
 
 
-
     }
 
 
-    void breed() {
+    void breed(vector<int> spaces, vector<Ant> &ants, int &numAnts) {
+
+        if (age >= 3) {
+
+            if (spaces.size() != 0) {
+
+                int direction = (rand() % spaces.size());
+                //Breed right
+                if (spaces[direction] == 1) {
+                    if (xLoc < 19) {
+                        ants.push_back(Ant(xLoc + 1, yLoc));
+                        numAnts++;
+                    }
+                }
+                    //Breed Left
+                else if (spaces[direction] == 2) {
+                    if (xLoc > 0) {
+                        ants.push_back(Ant(xLoc - 1, yLoc));
+                        numAnts++;
+
+                    }
+                }
+                    //Breed Up
+                else if (spaces[direction] == 3) {
+                    if (yLoc > 0) {
+                        ants.push_back(Ant(xLoc, yLoc - 1));
+                        numAnts++;
+
+                    }
+                }
+                    //Breed down
+                else if (spaces[direction] == 4) {
+                    if (yLoc < 19) {
+                        ants.push_back(Ant(xLoc, yLoc + 1));
+                        numAnts++;
+
+                    }
+                }
+
+            }
+
+            age = 0;
+        }
 
     }
 
@@ -90,6 +142,15 @@ private:
 
 class Doodlebug : public Organism {
 public:
+
+    Doodlebug(int x, int y) {
+        age = 0;
+
+        xLoc = x;
+        yLoc = y;
+
+    }
+
     Doodlebug() {
         age = 0;
 
@@ -104,7 +165,50 @@ public:
 
     }
 
-    void breed() {
+    void breed(vector<int> spaces, vector<Doodlebug> &bugs, int &numBugs) {
+
+        if (age >= 8) {
+
+            if (spaces.size() != 0) {
+
+                int direction = (rand() % spaces.size());
+                //Breed right
+                if (spaces[direction] == 1) {
+                    if (xLoc < 19) {
+                        bugs.push_back(Doodlebug(xLoc + 1, yLoc));
+                        numBugs++;
+                    }
+                }
+                    //Breed Left
+                else if (spaces[direction] == 2) {
+                    if (xLoc > 0) {
+                        bugs.push_back(Doodlebug(xLoc - 1, yLoc));
+                        numBugs++;
+
+                    }
+                }
+                    //Breed Up
+                else if (spaces[direction] == 3) {
+                    if (yLoc > 0) {
+                        bugs.push_back(Doodlebug(xLoc, yLoc - 1));
+                        numBugs++;
+
+
+                    }
+                }
+                    //Breed down
+                else if (spaces[direction] == 4) {
+                    if (yLoc < 19) {
+                        bugs.push_back(Doodlebug(xLoc, yLoc + 1));
+                        numBugs++;
+
+                    }
+                }
+
+            }
+
+            age = 0;
+        }
 
     }
 
@@ -157,7 +261,6 @@ public:
         bool up = true; // 3
         bool down = true; // 4
 
-        vector<Organism> combined;
 
         for (int a = 0; a < numAnts; a++) {
             //check right
@@ -227,7 +330,7 @@ public:
             if (swapped) {
                 swapped = false;
                 for (int x = 0; x < numAnts; x++) {
-                    for (int y = x+1; y < numAnts; y++) {
+                    for (int y = x + 1; y < numAnts; y++) {
                         if (x != y) {
                             if (ants[x].xLoc == ants[y].xLoc && ants[x].yLoc == ants[y].yLoc) {
                                 ants[x].xLoc++;
@@ -282,8 +385,10 @@ public:
 
 int main() {
 
+    srand(time(0));
+
     Board playingBoard;
-    int step = 0, numAnts = 100, numBugs = 0;
+    int step = 0, numAnts = 10, numBugs = 5;
 
     vector<Ant> ants;
     for (int a = 0; a < numAnts; a++) {
@@ -295,13 +400,14 @@ int main() {
         bugs.push_back(Doodlebug());
     }
 
-    playingBoard.cleanAnts(ants,numAnts);
+    playingBoard.cleanAnts(ants, numAnts);
 
     string input;
 
     cout << "Step: " << step << endl;
 
     playingBoard.drawBoard(ants, numAnts, bugs, numBugs);
+
 
     while (true) {
 
@@ -320,14 +426,31 @@ int main() {
 
         playingBoard.drawBoard(ants, numAnts, bugs, numBugs);
 
-        for (int a = 0; a < numAnts; a++) {
+        for (int b = 0; b < numBugs; b++) {
 
-//            cout << a << endl;
-            ants[a].move(playingBoard.legalSpaces(ants, numAnts, bugs, numBugs, ants[a].xLoc, ants[a].yLoc));
-            ants[a].ageUp();
+            bugs[b].move(playingBoard.legalSpaces(ants, numAnts, bugs, numBugs, bugs[b].xLoc, bugs[b].yLoc));
+            bugs[b].ageUp();
+            bugs[b].breed(playingBoard.legalSpaces(ants, numAnts, bugs, numBugs, bugs[b].xLoc, bugs[b].yLoc),bugs, numBugs);
+
 
         }
 
+
+        for (int a = 0; a < numAnts; a++) {
+
+            ants[a].move(playingBoard.legalSpaces(ants, numAnts, bugs, numBugs, ants[a].xLoc, ants[a].yLoc));
+            ants[a].ageUp();
+            ants[a].breed(playingBoard.legalSpaces(ants, numAnts, bugs, numBugs, ants[a].xLoc, ants[a].yLoc),ants, numAnts);
+
+
+        }
+
+//        for (int a = 0; a < numAnts; a++) {
+//
+//            cout << "Ant: " << a + 1 << " (" << ants[a].xLoc << ", " << ants[a].yLoc << "), age: " << ants[a].age
+//                 << endl;
+//
+//        }
 
 
     }
