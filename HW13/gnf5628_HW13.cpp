@@ -463,8 +463,15 @@ int main() {
         for (int b = 0; b < numBugs; b++) {
 
             bugs[b].move(playingBoard.legalSpaces(ants, numAnts, bugs, numBugs, bugs[b].xLoc, bugs[b].yLoc));
+
             bugs[b].ageUp();
-            bugs[b].starve();
+
+            if(bugs[b].starve()) {
+                bugs.erase(b);
+                numBugs--;
+
+            }
+
             bugs[b].breed(playingBoard.legalSpaces(ants, numAnts, bugs, numBugs, bugs[b].xLoc, bugs[b].yLoc), bugs,
                           numBugs);
 
@@ -475,7 +482,9 @@ int main() {
         for (int a = 0; a < numAnts; a++) {
 
             ants[a].move(playingBoard.legalSpaces(ants, numAnts, bugs, numBugs, ants[a].xLoc, ants[a].yLoc));
+
             ants[a].ageUp();
+
             ants[a].breed(playingBoard.legalSpaces(ants, numAnts, bugs, numBugs, ants[a].xLoc, ants[a].yLoc), ants,
                           numAnts);
 
