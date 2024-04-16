@@ -475,7 +475,6 @@ int main() {
             bugs[b].breed(playingBoard.legalSpaces(ants, numAnts, bugs, numBugs, bugs[b].xLoc, bugs[b].yLoc), bugs,
                           numBugs);
 
-
         }
 
 
