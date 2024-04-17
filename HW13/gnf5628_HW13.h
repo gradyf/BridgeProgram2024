@@ -1,0 +1,14 @@
+//
+// Created by Gray Forrester on 4/16/24.
+//
+
+#ifndef BRIDGEPROGRAM2024_GNF5628_HW13_H
+#define BRIDGEPROGRAM2024_GNF5628_HW13_H
+
+
+class gnf5628_HW13 {
+
+};
+
+
+#endif //BRIDGEPROGRAM2024_GNF5628_HW13_H
