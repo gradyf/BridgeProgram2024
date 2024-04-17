@@ -8,10 +8,10 @@
 using namespace std;
 
 
-class Organism {
+class Organism_OLD {
 public:
 
-    int xLoc, yLoc, age;
+    int xLoc_OLD, yLoc, age;
 
     static int number;
 
@@ -24,7 +24,7 @@ private:
 
 };
 
-class Ant : public Organism {
+class Ant : public Organism_OLD {
 public:
 
 
@@ -34,7 +34,7 @@ public:
 
         // initializing the random guess variable
 
-        xLoc = x;
+        xLoc_OLD = x;
         yLoc = y;
     }
 
@@ -45,7 +45,7 @@ public:
         // initializing the random guess variable
         int xLocation = (rand() % 20);
         int yLocation = (rand() % 20);
-        xLoc = xLocation;
+        xLoc_OLD = xLocation;
         yLoc = yLocation;
     }
 
@@ -57,14 +57,14 @@ public:
             int direction = (rand() % spaces.size());
             //move right
             if (spaces[direction] == 1) {
-                if (xLoc < 19) {
-                    xLoc++;
+                if (xLoc_OLD < 19) {
+                    xLoc_OLD++;
                 }
             }
                 //Move Left
             else if (spaces[direction] == 2) {
-                if (xLoc > 0) {
-                    xLoc--;
+                if (xLoc_OLD > 0) {
+                    xLoc_OLD--;
                 }
             }
                 //Move Up
@@ -95,15 +95,15 @@ public:
                 int direction = (rand() % spaces.size());
                 //Breed right
                 if (spaces[direction] == 1) {
-                    if (xLoc < 19) {
-                        ants.push_back(Ant(xLoc + 1, yLoc));
+                    if (xLoc_OLD < 19) {
+                        ants.push_back(Ant(xLoc_OLD + 1, yLoc));
                         numAnts++;
                     }
                 }
                     //Breed Left
                 else if (spaces[direction] == 2) {
-                    if (xLoc > 0) {
-                        ants.push_back(Ant(xLoc - 1, yLoc));
+                    if (xLoc_OLD > 0) {
+                        ants.push_back(Ant(xLoc_OLD - 1, yLoc));
                         numAnts++;
 
                     }
@@ -111,7 +111,7 @@ public:
                     //Breed Up
                 else if (spaces[direction] == 3) {
                     if (yLoc > 0) {
-                        ants.push_back(Ant(xLoc, yLoc - 1));
+                        ants.push_back(Ant(xLoc_OLD, yLoc - 1));
                         numAnts++;
 
                     }
@@ -119,7 +119,7 @@ public:
                     //Breed down
                 else if (spaces[direction] == 4) {
                     if (yLoc < 19) {
-                        ants.push_back(Ant(xLoc, yLoc + 1));
+                        ants.push_back(Ant(xLoc_OLD, yLoc + 1));
                         numAnts++;
 
                     }
@@ -141,7 +141,7 @@ private:
 
 };
 
-class Doodlebug : public Organism {
+class Doodlebug : public Organism_OLD {
 public:
 
     int ageEating;
@@ -150,7 +150,7 @@ public:
         age = 0;
         ageEating = 0;
 
-        xLoc = x;
+        xLoc_OLD = x;
         yLoc = y;
 
     }
@@ -161,7 +161,7 @@ public:
 
         int xLocation = (rand() % 20);
         int yLocation = (rand() % 20);
-        xLoc = xLocation;
+        xLoc_OLD = xLocation;
         yLoc = yLocation;
 
     }
@@ -173,14 +173,14 @@ public:
             int direction = (rand() % spaces.size());
             //move right
             if (spaces[direction] == 1) {
-                if (xLoc < 19) {
-                    xLoc++;
+                if (xLoc_OLD < 19) {
+                    xLoc_OLD++;
                 }
             }
                 //Move Left
             else if (spaces[direction] == 2) {
-                if (xLoc > 0) {
-                    xLoc--;
+                if (xLoc_OLD > 0) {
+                    xLoc_OLD--;
                 }
             }
                 //Move Up
@@ -210,15 +210,15 @@ public:
                 int direction = (rand() % spaces.size());
                 //Breed right
                 if (spaces[direction] == 1) {
-                    if (xLoc < 19) {
-                        bugs.push_back(Doodlebug(xLoc + 1, yLoc));
+                    if (xLoc_OLD < 19) {
+                        bugs.push_back(Doodlebug(xLoc_OLD + 1, yLoc));
                         numBugs++;
                     }
                 }
                     //Breed Left
                 else if (spaces[direction] == 2) {
-                    if (xLoc > 0) {
-                        bugs.push_back(Doodlebug(xLoc - 1, yLoc));
+                    if (xLoc_OLD > 0) {
+                        bugs.push_back(Doodlebug(xLoc_OLD - 1, yLoc));
                         numBugs++;
 
                     }
@@ -226,7 +226,7 @@ public:
                     //Breed Up
                 else if (spaces[direction] == 3) {
                     if (yLoc > 0) {
-                        bugs.push_back(Doodlebug(xLoc, yLoc - 1));
+                        bugs.push_back(Doodlebug(xLoc_OLD, yLoc - 1));
                         numBugs++;
 
 
@@ -235,7 +235,7 @@ public:
                     //Breed down
                 else if (spaces[direction] == 4) {
                     if (yLoc < 19) {
-                        bugs.push_back(Doodlebug(xLoc, yLoc + 1));
+                        bugs.push_back(Doodlebug(xLoc_OLD, yLoc + 1));
                         numBugs++;
 
                     }
@@ -307,13 +307,13 @@ public:
             for (int x = 0; x < 20; x++) {
                 printed = false;
                 for (int a = 0; a < numAnts; a++) {
-                    if (ants[a].xLoc == x && ants[a].yLoc == y) {
+                    if (ants[a].xLoc_OLD == x && ants[a].yLoc == y) {
                         cout << " O ";
                         printed = true;
                     }
                 }
                 for (int b = 0; b < numBugs; b++) {
-                    if (bugs[b].xLoc == x && bugs[b].yLoc == y) {
+                    if (bugs[b].xLoc_OLD == x && bugs[b].yLoc == y) {
                         cout << " X ";
                         printed = true;
                     }
@@ -336,19 +336,19 @@ public:
 
         for (int a = 0; a < numAnts; a++) {
             //check right
-            if (ants[a].xLoc == (x + 1) && ants[a].yLoc == y) {
+            if (ants[a].xLoc_OLD == (x + 1) && ants[a].yLoc == y) {
                 right = false;
             }
             //check left
-            if (ants[a].xLoc == (x - 1) && ants[a].yLoc == y) {
+            if (ants[a].xLoc_OLD == (x - 1) && ants[a].yLoc == y) {
                 left = false;
             }
             //check up
-            if (ants[a].xLoc == (x) && ants[a].yLoc == (y - 1)) {
+            if (ants[a].xLoc_OLD == (x) && ants[a].yLoc == (y - 1)) {
                 up = false;
             }
             //check down
-            if (ants[a].xLoc == (x) && ants[a].yLoc == (y + 1)) {
+            if (ants[a].xLoc_OLD == (x) && ants[a].yLoc == (y + 1)) {
                 down = false;
             }
 
@@ -356,19 +356,19 @@ public:
 
         for (int b = 0; b < numBugs; b++) {
             //check right
-            if (bugs[b].xLoc == (x + 1) && bugs[b].yLoc == y) {
+            if (bugs[b].xLoc_OLD == (x + 1) && bugs[b].yLoc == y) {
                 right = false;
             }
             //check left
-            if (bugs[b].xLoc == (x - 1) && bugs[b].yLoc == y) {
+            if (bugs[b].xLoc_OLD == (x - 1) && bugs[b].yLoc == y) {
                 left = false;
             }
             //check up
-            if (bugs[b].xLoc == (x) && bugs[b].yLoc == (y - 1)) {
+            if (bugs[b].xLoc_OLD == (x) && bugs[b].yLoc == (y - 1)) {
                 up = false;
             }
             //check down
-            if (bugs[b].xLoc == (x) && bugs[b].yLoc == (y + 1)) {
+            if (bugs[b].xLoc_OLD == (x) && bugs[b].yLoc == (y + 1)) {
                 down = false;
             }
 
@@ -402,8 +402,8 @@ public:
                 for (int x = 0; x < numAnts; x++) {
                     for (int y = x + 1; y < numAnts; y++) {
                         if (x != y) {
-                            if (ants[x].xLoc == ants[y].xLoc && ants[x].yLoc == ants[y].yLoc) {
-                                ants[x].xLoc++;
+                            if (ants[x].xLoc_OLD == ants[y].xLoc_OLD && ants[x].yLoc == ants[y].yLoc) {
+                                ants[x].xLoc_OLD++;
                                 ants[x].yLoc++;
                                 swapped = true;
                             }
@@ -431,8 +431,8 @@ public:
                 for (int x = 0; x < numBugs; x++) {
                     for (int y = 0; y < numBugs; y++) {
                         if (x != y) {
-                            if (bugs[x].xLoc == bugs[y].xLoc && bugs[x].yLoc == bugs[y].yLoc) {
-                                bugs[x].xLoc++;
+                            if (bugs[x].xLoc_OLD == bugs[y].xLoc_OLD && bugs[x].yLoc == bugs[y].yLoc) {
+                                bugs[x].xLoc_OLD++;
                                 bugs[x].yLoc++;
                                 swapped = true;
                             }
@@ -491,7 +491,7 @@ int main() {
 //
 //        for (int b = 0; b < numBugs; b++) {
 //
-//            bugs[b].move(playingBoard.legalSpaces(ants, numAnts, bugs, numBugs, bugs[b].xLoc, bugs[b].yLoc));
+//            bugs[b].move(playingBoard.legalSpaces(ants, numAnts, bugs, numBugs, bugs[b].xLoc_OLD, bugs[b].yLoc));
 //
 //            bugs[b].ageUp();
 //
@@ -502,7 +502,7 @@ int main() {
 //        for (int b = 0; b < numBugs; b++) {
 //
 //
-//            bugs[b].breed(playingBoard.legalSpaces(ants, numAnts, bugs, numBugs, bugs[b].xLoc, bugs[b].yLoc), bugs,
+//            bugs[b].breed(playingBoard.legalSpaces(ants, numAnts, bugs, numBugs, bugs[b].xLoc_OLD, bugs[b].yLoc), bugs,
 //                          numBugs);
 //
 //
@@ -511,11 +511,11 @@ int main() {
 //
 //        for (int a = 0; a < numAnts; a++) {
 //
-//            ants[a].move(playingBoard.legalSpaces(ants, numAnts, bugs, numBugs, ants[a].xLoc, ants[a].yLoc));
+//            ants[a].move(playingBoard.legalSpaces(ants, numAnts, bugs, numBugs, ants[a].xLoc_OLD, ants[a].yLoc));
 //
 //            ants[a].ageUp();
 //
-//            ants[a].breed(playingBoard.legalSpaces(ants, numAnts, bugs, numBugs, ants[a].xLoc, ants[a].yLoc), ants,
+//            ants[a].breed(playingBoard.legalSpaces(ants, numAnts, bugs, numBugs, ants[a].xLoc_OLD, ants[a].yLoc), ants,
 //                          numAnts);
 //
 //
@@ -523,7 +523,7 @@ int main() {
 //
 ////        for (int a = 0; a < numAnts; a++) {
 ////
-////            cout << "Ant: " << a + 1 << " (" << ants[a].xLoc << ", " << ants[a].yLoc << "), age: " << ants[a].age
+////            cout << "Ant: " << a + 1 << " (" << ants[a].xLoc_OLD << ", " << ants[a].yLoc << "), age: " << ants[a].age
 ////                 << endl;
 ////
 ////        }
