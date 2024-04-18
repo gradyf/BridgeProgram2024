@@ -29,7 +29,6 @@ public:
 
     bool isEaten;
 
-
     Ant(int x, int y) {
 
         age = 0;
@@ -88,7 +87,6 @@ public:
 
     }
 
-
     void breed(vector<int> spaces, vector<Ant> &ants, int &numAnts) {
 
         if (age >= 3) {
@@ -124,21 +122,16 @@ public:
                     if (yLoc < 19) {
                         ants.push_back(Ant(xLoc, yLoc + 1));
                         numAnts++;
-
                     }
                 }
-
             }
-
             age = 0;
         }
-
     }
 
     void ageUp() {
         age++;
     }
-
 
 private:
 
@@ -158,8 +151,6 @@ public:
         yLoc = y;
 
         isStarved = false;
-
-
     }
 
     Doodlebug() {
@@ -172,8 +163,6 @@ public:
         yLoc = yLocation;
 
         isStarved = false;
-
-
     }
 
     void move(vector<int> spaces) {
@@ -213,7 +202,7 @@ public:
 
     void breed(vector<int> spaces, vector<Doodlebug> &bugs, int &numBugs) {
 
-        if (age >= 8) {
+        if (age >= 2) {
 
             if (spaces.size() != 0) {
 
@@ -230,7 +219,6 @@ public:
                     if (xLoc > 0) {
                         bugs.push_back(Doodlebug(xLoc - 1, yLoc));
                         numBugs++;
-
                     }
                 }
                     //Breed Up
@@ -238,8 +226,6 @@ public:
                     if (yLoc > 0) {
                         bugs.push_back(Doodlebug(xLoc, yLoc - 1));
                         numBugs++;
-
-
                     }
                 }
                     //Breed down
@@ -247,33 +233,24 @@ public:
                     if (yLoc < 19) {
                         bugs.push_back(Doodlebug(xLoc, yLoc + 1));
                         numBugs++;
-
                     }
                 }
-
             }
-
             age = 0;
         }
-
     }
 
     void starve() {
 
-        if (ageEating >= 8) {
+        if (ageEating >= 3) {
             isStarved = true;
         }
 
     }
 
-    vector<Doodlebug> newBugs(vector<Doodlebug> &bugs, int &numBugs) {
-
-
-    }
-
     void ageUp() {
-        age++;
         ageEating++;
+        age++;
     }
 
 private:
@@ -432,7 +409,7 @@ public:
 
     }
 
-    void killBUgs(vector<Doodlebug> &bugs, int numBugs) {
+    void killBugs(vector<Doodlebug> &bugs, int &numBugs) {
 
         vector<Doodlebug> tempBugs;
 
@@ -442,7 +419,33 @@ public:
             }
         }
 
+        for (int x = 0; x < numBugs; x++) {
+            if (bugs[x].isStarved == true) {
+                numBugs--;
+            }
+        }
+
         bugs = tempBugs;
+
+    }
+
+    void killAnts(vector<Ant> &ants, int &numAnts) {
+
+        vector<Ant> tempAnt;
+
+        for (int x = 0; x < numAnts; x++) {
+            if (ants[x].isEaten == false) {
+                tempAnt.push_back(ants[x]);
+            }
+        }
+
+        for (int x = 0; x < numAnts; x++) {
+            if (ants[x].isEaten == true) {
+                numAnts--;
+            }
+        }
+
+        ants = tempAnt;
 
     }
 
@@ -468,7 +471,6 @@ int main() {
 
     playingBoard.drawBoard(ants, numAnts, bugs, numBugs);
 
-
     while (true) {
 
         getline(cin, input);
@@ -484,17 +486,13 @@ int main() {
 
         cout << "Step: " << step << endl;
 
-        playingBoard.drawBoard(ants, numAnts, bugs, numBugs);
-
         for (int b = 0; b < numBugs; b++) {
 
             bugs[b].move(playingBoard.legalSpaces(ants, numAnts, bugs, numBugs, bugs[b].xLoc, bugs[b].yLoc));
-
             bugs[b].ageUp();
             bugs[b].starve();
 
         }
-
 
         for (int b = 0; b < numBugs; b++) {
 
@@ -503,7 +501,8 @@ int main() {
 
         }
 
-        playingBoard.killBUgs(bugs, numBugs);
+        playingBoard.killBugs(bugs, numBugs);
+        playingBoard.killAnts(ants, numAnts);
 
 
         for (int a = 0; a < numAnts; a++) {
@@ -515,8 +514,8 @@ int main() {
             ants[a].breed(playingBoard.legalSpaces(ants, numAnts, bugs, numBugs, ants[a].xLoc, ants[a].yLoc), ants,
                           numAnts);
 
-
         }
+        playingBoard.drawBoard(ants, numAnts, bugs, numBugs);
 
         for (int a = 0; a < numBugs; a++) {
 
