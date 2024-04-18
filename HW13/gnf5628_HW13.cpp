@@ -27,15 +27,17 @@ private:
 class Ant : public Organism {
 public:
 
+    bool isEaten;
+
 
     Ant(int x, int y) {
 
         age = 0;
 
-        // initializing the random guess variable
-
         xLoc = x;
         yLoc = y;
+
+        isEaten = false;
     }
 
     Ant() {
@@ -47,6 +49,7 @@ public:
         int yLocation = (rand() % 20);
         xLoc = xLocation;
         yLoc = yLocation;
+        isEaten = false;
     }
 
 
@@ -145,6 +148,7 @@ class Doodlebug : public Organism {
 public:
 
     int ageEating;
+    bool isStarved;
 
     Doodlebug(int x, int y) {
         age = 0;
@@ -152,6 +156,9 @@ public:
 
         xLoc = x;
         yLoc = y;
+
+        isStarved = false;
+
 
     }
 
@@ -163,6 +170,9 @@ public:
         int yLocation = (rand() % 20);
         xLoc = xLocation;
         yLoc = yLocation;
+
+        isStarved = false;
+
 
     }
 
@@ -248,17 +258,16 @@ public:
 
     }
 
-    bool starve() {
+    void starve() {
 
         if (ageEating >= 8) {
-            return true;
-        } else {
-            return false;
+            isStarved = true;
         }
 
     }
 
     vector<Doodlebug> newBugs(vector<Doodlebug> &bugs, int &numBugs) {
+
 
     }
 
@@ -272,7 +281,6 @@ private:
 
 class Board {
 public:
-
 
     void drawBoard(vector<Ant> ants, int numAnts, vector<Doodlebug> bugs, int numBugs) {
 
@@ -424,6 +432,20 @@ public:
 
     }
 
+    void killBUgs(vector<Doodlebug> &bugs, int numBugs) {
+
+        vector<Doodlebug> tempBugs;
+
+        for (int x = 0; x < numBugs; x++) {
+            if (bugs[x].isStarved == false) {
+                tempBugs.push_back(bugs[x]);
+            }
+        }
+
+        bugs = tempBugs;
+
+    }
+
 };
 
 int main() {
@@ -431,7 +453,7 @@ int main() {
     srand(time(0));
 
     Board playingBoard;
-    int step = 0, numAnts = 100, numBugs = 5;
+    int step = 0, numAnts = 0, numBugs = 5;
 
     vector<Ant> ants(numAnts);
 
@@ -469,18 +491,19 @@ int main() {
             bugs[b].move(playingBoard.legalSpaces(ants, numAnts, bugs, numBugs, bugs[b].xLoc, bugs[b].yLoc));
 
             bugs[b].ageUp();
+            bugs[b].starve();
 
         }
 
 
         for (int b = 0; b < numBugs; b++) {
 
-
             bugs[b].breed(playingBoard.legalSpaces(ants, numAnts, bugs, numBugs, bugs[b].xLoc, bugs[b].yLoc), bugs,
                           numBugs);
 
-
         }
+
+        playingBoard.killBUgs(bugs, numBugs);
 
 
         for (int a = 0; a < numAnts; a++) {
@@ -495,12 +518,12 @@ int main() {
 
         }
 
-//        for (int a = 0; a < numAnts; a++) {
-//
-//            cout << "Ant: " << a + 1 << " (" << ants[a].xLoc << ", " << ants[a].yLoc << "), age: " << ants[a].age
-//                 << endl;
-//
-//        }
+        for (int a = 0; a < numBugs; a++) {
+
+            cout << "Bug: " << a + 1 << " (" << bugs[a].xLoc << ", " << bugs[a].yLoc << "), age: " << bugs[a].age
+                 << " Age Eating: " << bugs[a].ageEating << " Starvation: " << bugs[a].isStarved << endl;
+
+        }
 
 
     }
