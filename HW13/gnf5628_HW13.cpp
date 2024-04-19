@@ -202,7 +202,7 @@ public:
 
     void breed(vector<int> spaces, vector<Doodlebug> &bugs, int &numBugs) {
 
-        if (age >= 2) {
+        if (age >= 8) {
 
             if (spaces.size() != 0) {
 
