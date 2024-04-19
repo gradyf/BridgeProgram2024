@@ -7,7 +7,7 @@
 
 using namespace std;
 
-const int BOARD_SIZE = 5;
+const int BOARD_SIZE = 20;
 
 class Organism {
 public:
@@ -288,7 +288,7 @@ public:
         }
     }
 
-    vector<int> legalSpaces(vector<Ant> ants, int numAnts, vector<Doodlebug> bugs, int numBugs, int x, int y) {
+    vector<int> legalSpacesAnts(vector<Ant> ants, int numAnts, vector<Doodlebug> bugs, int numBugs, int x, int y) {
 
         vector<int> legalSpaces;
         bool right = true; // 1
@@ -316,24 +316,26 @@ public:
 
         }
 
-        for (int b = 0; b < numBugs; b++) {
-            //check right
-            if (bugs[b].xLoc == (x + 1) && bugs[b].yLoc == y) {
-                right = false;
-            }
-            //check left
-            if (bugs[b].xLoc == (x - 1) && bugs[b].yLoc == y) {
-                left = false;
-            }
-            //check up
-            if (bugs[b].xLoc == (x) && bugs[b].yLoc == (y - 1)) {
-                up = false;
-            }
-            //check down
-            if (bugs[b].xLoc == (x) && bugs[b].yLoc == (y + 1)) {
-                down = false;
-            }
+        if(numBugs >0) {
+            for (int b = 0; b < numBugs; b++) {
+                //check right
+                if (bugs[b].xLoc == (x + 1) && bugs[b].yLoc == y) {
+                    right = false;
+                }
+                //check left
+                if (bugs[b].xLoc == (x - 1) && bugs[b].yLoc == y) {
+                    left = false;
+                }
+                //check up
+                if (bugs[b].xLoc == (x) && bugs[b].yLoc == (y - 1)) {
+                    up = false;
+                }
+                //check down
+                if (bugs[b].xLoc == (x) && bugs[b].yLoc == (y + 1)) {
+                    down = false;
+                }
 
+            }
         }
 
         if (right) {
@@ -517,7 +519,7 @@ int main() {
     srand(time(0));
 
     Board playingBoard;
-    int step = 0, numAnts = 10, numBugs = 2;
+    int step = 0, numAnts = 100, numBugs = 5;
 
     vector<Ant> ants(numAnts);
 
@@ -541,7 +543,7 @@ int main() {
         }
         step++;
 
-        for (int x = 0; x < 50; x++) {
+        for (int x = 0; x < 5; x++) {
             cout << endl;
         }
 
@@ -563,13 +565,6 @@ int main() {
 
         playingBoard.markAnts(ants, numAnts, bugs, numBugs);
 
-        for (int a = 0; a < numAnts; a++) {
-
-            cout << "Ant: " << a + 1 << " (" << ants[a].xLoc << ", " << ants[a].yLoc << "), age: " << ants[a].age
-                 << " eaten? " << ants[a].isEaten
-                 << endl;
-
-        }
 
 
         playingBoard.killAnts(ants, numAnts);
@@ -593,30 +588,15 @@ int main() {
 
         for (int a = 0; a < numAnts; a++) {
 
-            ants[a].move(playingBoard.legalSpaces(ants, numAnts, bugs, numBugs, ants[a].xLoc, ants[a].yLoc));
+            ants[a].move(playingBoard.legalSpacesAnts(ants, numAnts, bugs, numBugs, ants[a].xLoc, ants[a].yLoc));
 
             ants[a].ageUp();
 
-            ants[a].breed(playingBoard.legalSpaces(ants, numAnts, bugs, numBugs, ants[a].xLoc, ants[a].yLoc), ants,
+            ants[a].breed(playingBoard.legalSpacesAnts(ants, numAnts, bugs, numBugs, ants[a].xLoc, ants[a].yLoc), ants,
                           numAnts);
 
         }
         playingBoard.drawBoard(ants, numAnts, bugs, numBugs);
-
-//        for (int a = 0; a < numBugs; a++) {
-//
-//            cout << "Bug: " << a + 1 << " (" << bugs[a].xLoc << ", " << bugs[a].yLoc << "), age: " << bugs[a].age
-//                 << " Age Eating: " << bugs[a].ageEating << " Starvation: " << bugs[a].isStarved << endl;
-//
-//        }
-        for (int a = 0; a < numAnts; a++) {
-
-            cout << "Ant: " << a + 1 << " (" << ants[a].xLoc << ", " << ants[a].yLoc << "), age: " << ants[a].age
-            << " eaten? " << ants[a].isEaten
-                 << endl;
-
-        }
-
 
     }
 
