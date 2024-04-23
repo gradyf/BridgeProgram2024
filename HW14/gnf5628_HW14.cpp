@@ -220,6 +220,26 @@ int main() {
     vector<char> answerVect14 = minMax(vect14);
     printVect(answerVect14);
 
+    cout << endl;
+
+    vector<char> vect15;
+    char arr15[] = {'t', 'b'};
+    int arr15Size = 2;
+    fillVect(vect15, arr15, arr15Size);
+    printVect(vect15);
+    vector<char> answerVect15 = minMax(vect15);
+    printVect(answerVect15);
+
+cout << endl;
+
+    vector<char> vect16;
+    char arr16[] = {'t'};
+    int arr16Size = 1;
+    fillVect(vect16, arr16, arr16Size);
+    printVect(vect16);
+    vector<char> answerVect16 = minMax(vect16);
+    printVect(answerVect16);
+
 
 }
 
