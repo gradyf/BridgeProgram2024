@@ -88,6 +88,14 @@ void printVect(vector<T3> &vect) {
     cout << endl;
 }
 
+template<typename T4>
+void testFunc(vector<T4> &vect, T4 arr[], int arrSize) {
+    fillVect(vect, arr, arrSize);
+    printVect(vect);
+    vector<T4> answerVect = minMax(vect);
+    printVect(answerVect);
+}
+
 
 int main() {
 
@@ -230,7 +238,7 @@ int main() {
     vector<char> answerVect15 = minMax(vect15);
     printVect(answerVect15);
 
-cout << endl;
+    cout << endl;
 
     vector<char> vect16;
     char arr16[] = {'t'};
@@ -239,6 +247,26 @@ cout << endl;
     printVect(vect16);
     vector<char> answerVect16 = minMax(vect16);
     printVect(answerVect16);
+
+
+    cout << endl;
+
+    vector<int> vect17;
+    int arr17[] = {7, 6, 5, 4, 3, 2, 1};
+    int arr17Size = 7;
+    fillVect(vect17, arr17, arr17Size);
+    printVect(vect17);
+    vector<int> answerVect17 = minMax(vect17);
+    printVect(answerVect17);
+
+    cout << endl;
+
+    vector<double> vect18;
+    double arr18[] = {7.6, 6.1, 5.0, 4.51, 3.623, 1.110, 1.111};
+    int arr18Size = 7;
+    testFunc(vect18,arr18,arr18Size);
+
+    cout << endl;
 
 
 }
