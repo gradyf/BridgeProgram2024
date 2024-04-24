@@ -305,6 +305,23 @@ int main() {
     testFunc(vect18, arr18, arr18Size);
 
     cout << endl;
+    cout << "Vector 19, size 7" << endl;
+
+    vector<double> vect19;
+    double arr19[] = {0, 6.1, 5.0, 4.51, 3.623, 1.110, 1.111};
+    int arr19Size = 7;
+    testFunc(vect19, arr19, arr19Size);
+
+    cout << endl;
+
+    cout << "Vector 20, size 7" << endl;
+
+    vector<double> vect20;
+    double arr20[] = {3.2, 6.1, 5.0, 4.51, 3.623, 1.110, 0};
+    int arr20Size = 7;
+    testFunc(vect20, arr20, arr20Size);
+
+    cout << endl;
 
 
 }
