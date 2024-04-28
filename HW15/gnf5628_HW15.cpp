@@ -15,17 +15,32 @@ public:
 
     People();
 
-    void set_owed(double owed) {
-        this->owed = owed;
+    void set_owed(double newOwed) {
+        this->owed = newOwed;
     }
 };
 
 class Node {
-    People person;
-    vector<People>* next;
-
 public:
+    People person;
+    Node* next;
     Node(People newPerson = People(), vector<People>* newNext = nullptr) : person(newPerson), next(newNext) {}
+
+};
+
+class LList {
+    Node* head;
+public:
+    LList() : head(nullptr) {}
+    ~LList() {
+        Node* current = head;
+        while (current != nullptr) {
+            Node* nextNode = current->next;
+            delete current;
+            current = nextNode;
+        }
+        head = nullptr;
+    }
 
 };
 
