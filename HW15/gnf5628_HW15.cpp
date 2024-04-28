@@ -57,15 +57,18 @@ public:
 
     void addNode(Node *n) {
         Node *current = head;
-        while (n != nullptr) {
+        if (current == nullptr) {
+            head = n;
+        }
+        while (current != nullptr) {
             if (current->next == nullptr) {
                 current->next = n;
                 n->next == nullptr;
             } else {
                 current = current->next;
             }
-
         }
+
     }
 
 };
@@ -74,16 +77,22 @@ public:
 int main() {
 
     Node *first = new Node(People(50.12, "John Smith"));
-    Node *second = new Node(People(20.13, "Jane Smith"));
-    Node *third = new Node(People(1.13, "Gray Smith"));
+//    Node *second = new Node(People(20.13, "Jane Smith"));
+//    Node *third = new Node(People(1.13, "Gray Smith"));
+//
+//    first->next = second;
+//    second->next = third;
+//    third->next = nullptr;
 
-    first->next = second;
-    second->next = third;
-    third->next = nullptr;
+    LList *list = new LList();
 
-    LList *list = new LList(first);
-
+    list->addNode(first);
     list->printList();
-    delete list;
+//
+//    list->addNode(second);
+//    list->printList();
+
+
+//    delete list;
 
 }
