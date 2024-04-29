@@ -92,9 +92,10 @@ int main() {
 
     ifstream in_stream;
 
-    double paid, next;
+    double paid;
     string name;
-    int count = 0;
+
+    LList *list = new LList();
 
     vector<People> peopleList;
 
@@ -107,33 +108,18 @@ int main() {
     while (in_stream >> paid) {
         getline(in_stream, name);
         peopleList.push_back(People(paid, name));
+
+        Node* temp = new Node(People(paid, name));
+        list->addNode(temp);
+
     }
     in_stream.close();
 
 
-    for (int x = 0; x < peopleList.size(); x++) {
-        cout << peopleList[x].name << " " << peopleList[x].paid << endl;
-    }
+    list->printList();
 
 
 
-//    Node *first = new Node(People(50.12, "John Smith"));
-//    Node *second = new Node(People(20.13, "Jane Smith"));
-//    Node *third = new Node(People(1.13, "Gray Smith"));
-//
-//
-//    LList *list = new LList();
-//
-//    list->addNode(first);
-//    list->printList();
-//
-//    list->addNode(second);
-//    list->printList();
-//
-//    list->addNode(third);
-//    list->printList();
-//
-//
 //    delete list;
 //    list->clearList();
 
