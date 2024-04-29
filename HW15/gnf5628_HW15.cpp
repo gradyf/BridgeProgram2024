@@ -3,6 +3,8 @@
 //
 #include <iostream>
 #include <string>
+#include <fstream>
+#include <vector>
 
 using namespace std;
 
@@ -59,11 +61,13 @@ public:
         Node *current = head;
         if (current == nullptr) {
             head = n;
+
         }
         while (current != nullptr) {
             if (current->next == nullptr) {
                 current->next = n;
-                n->next == nullptr;
+                break;
+
             } else {
                 current = current->next;
             }
@@ -71,28 +75,67 @@ public:
 
     }
 
+    void clearList() {
+        Node *current = head;
+        while (current != nullptr) {
+            Node *nextNode = current->next;
+            delete current;
+            current = nextNode;
+        }
+        head = nullptr;
+    }
+
 };
 
 
 int main() {
 
-    Node *first = new Node(People(50.12, "John Smith"));
+    ifstream in_stream;
+
+    double paid, next;
+    string name;
+    int count = 0;
+
+    vector<People> peopleList;
+
+    in_stream.open("List1.txt");
+
+    if (in_stream.fail()) {
+        cout << "Input file opening failed.\n";
+        exit(1);
+    }
+    while (in_stream >> paid) {
+        getline(in_stream, name);
+        peopleList.push_back(People(paid, name));
+    }
+    in_stream.close();
+
+
+    for (int x = 0; x < peopleList.size(); x++) {
+        cout << peopleList[x].name << " " << peopleList[x].paid << endl;
+    }
+
+
+
+//    Node *first = new Node(People(50.12, "John Smith"));
 //    Node *second = new Node(People(20.13, "Jane Smith"));
 //    Node *third = new Node(People(1.13, "Gray Smith"));
 //
-//    first->next = second;
-//    second->next = third;
-//    third->next = nullptr;
-
-    LList *list = new LList();
-
-    list->addNode(first);
-    list->printList();
+//
+//    LList *list = new LList();
+//
+//    list->addNode(first);
+//    list->printList();
 //
 //    list->addNode(second);
 //    list->printList();
-
-
+//
+//    list->addNode(third);
+//    list->printList();
+//
+//
 //    delete list;
+//    list->clearList();
+
 
 }
