@@ -53,19 +53,6 @@ public:
         head = nullptr;
     }
 
-    void printList() {
-        Node *n = head;
-        while (n != nullptr) {
-
-            cout << n->person.nameOfPerson << " paid " << n->person.amtInitiallyPaid << "; Owes: "
-                 << n->person.amtOwedToOthers << "; Is Owed: " << n->person.amtOwedToPerson << "; Owes to: " <<
-                 n->person.nameOwedTo << endl;
-
-            n = n->next;
-        }
-        cout << endl;
-    }
-
     void addNodeEnd(Node *n) {
         Node *current = head;
         if (current == nullptr) {
@@ -114,61 +101,6 @@ void printVect(vector<People> vect) {
     }
 }
 
-void payBack(vector<People> &owes, vector<People> &isOwed) {
-
-    int owesTrack = 0;
-    int owedTrack = 0;
-
-
-    while (owesTrack < owes.size()) {
-        sort(owes.begin(), owes.end());
-        owedTrack = 0;
-        while (owedTrack < isOwed.size()) {
-
-            if (owes[owesTrack].amtOwedToOthers > isOwed[owedTrack].amtOwedToPerson &&
-                isOwed[owedTrack].amtOwedToPerson != 0 && owes[owesTrack].amtPaidToOthers != 0) {
-
-                owes[owesTrack].nameOwedTo = isOwed[owedTrack].nameOfPerson;
-
-                People *temp = new People(owes[owesTrack].amtInitiallyPaid, owes[owesTrack].nameOfPerson + "2");
-                temp->amtOwedToOthers = owes[owesTrack].amtOwedToOthers - isOwed[owedTrack].amtOwedToPerson;
-
-                owes.push_back(*temp);
-
-                cout << owes[owesTrack].nameOfPerson << " is repaying " << owes[owesTrack].nameOwedTo
-                     << " " << owes[owesTrack].amtPaidToOthers << endl;
-                owes[owesTrack].amtPaidToOthers = isOwed[owedTrack].amtOwedToPerson;
-                owes[owesTrack].amtOwedToOthers =
-                        owes[owesTrack].amtOwedToOthers - isOwed[owedTrack].amtOwedToPerson;
-
-                isOwed[owedTrack].amtOwedToPerson =
-                        isOwed[owedTrack].amtOwedToPerson - owes[owesTrack].amtPaidToOthers;
-
-
-            } else if (owes[owesTrack].amtOwedToOthers < isOwed[owedTrack].amtOwedToPerson &&
-                       isOwed[owedTrack].amtOwedToPerson != 0) {
-
-                owes[owesTrack].nameOwedTo = isOwed[owedTrack].nameOfPerson;
-
-
-                cout << owes[owesTrack].nameOfPerson << " is repaying " << owes[owesTrack].nameOwedTo
-                     << " " << owes[owesTrack].amtPaidToOthers << endl;
-                owes[owesTrack].amtPaidToOthers = owes[owedTrack].amtOwedToOthers;
-                owes[owesTrack].amtOwedToOthers = owes[owesTrack].amtOwedToOthers - owes[owesTrack].amtPaidToOthers;
-
-                isOwed[owedTrack].amtOwedToPerson =
-                        isOwed[owedTrack].amtOwedToPerson - owes[owesTrack].amtPaidToOthers;
-
-
-            }
-            owedTrack++;
-
-        }
-        owesTrack++;
-    }
-
-}
-
 void sortOwes(vector<People>& vect) {
     for(int x = 0; x < vect.size(); x++) {
         for (int y = x; y < vect.size(); y++) {
@@ -179,8 +111,6 @@ void sortOwes(vector<People>& vect) {
     }
 }
 
-
-
 void sortOwed(vector<People>& vect) {
     for(int x = 0; x < vect.size(); x++) {
         for (int y = x; y < vect.size(); y++) {
@@ -189,6 +119,10 @@ void sortOwed(vector<People>& vect) {
             }
         }
     }
+}
+
+void payBack(vector<People> &owes, vector<People> &isOwed) {
+
 }
 
 int main() {
@@ -268,13 +202,22 @@ int main() {
 
     printVect(owes);
 
+    cout << endl;
+
+    printVect(isOwed);
+
     sortOwes(owes);
+    sortOwes(isOwed);
 
     cout << endl;
 
     printVect(owes);
 
+    cout << endl;
 
+    printVect(isOwed);
+
+    cout << endl;
 
     cout << "In the end, you should have all spent around " << "$" << avg;
 
