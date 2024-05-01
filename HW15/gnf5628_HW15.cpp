@@ -6,7 +6,6 @@
 
 using namespace std;
 
-
 class People {
 public:
     double amtInitiallyPaid;
@@ -115,7 +114,6 @@ void printVect(vector<People> vect) {
     }
 }
 
-
 void payBack(vector<People> &owes, vector<People> &isOwed) {
 
     int owesTrack = 0;
@@ -169,9 +167,29 @@ void payBack(vector<People> &owes, vector<People> &isOwed) {
         owesTrack++;
     }
 
-
 }
 
+void sortOwes(vector<People>& vect) {
+    for(int x = 0; x < vect.size(); x++) {
+        for (int y = x; y < vect.size(); y++) {
+            if(vect[x].amtOwedToOthers > vect[y].amtOwedToOthers) {
+                swap(vect[x], vect[y]);
+            }
+        }
+    }
+}
+
+
+
+void sortOwed(vector<People>& vect) {
+    for(int x = 0; x < vect.size(); x++) {
+        for (int y = x; y < vect.size(); y++) {
+            if(vect[x].amtOwedToPerson > vect[y].amtOwedToPerson) {
+                swap(vect[x], vect[y]);
+            }
+        }
+    }
+}
 
 int main() {
 
@@ -246,6 +264,18 @@ int main() {
 
     printVect(final);
 
-    cout << "In the end, you should have all spent around " << avg;
+    cout << endl;
+
+    printVect(owes);
+
+    sortOwes(owes);
+
+    cout << endl;
+
+    printVect(owes);
+
+
+
+    cout << "In the end, you should have all spent around " << "$" << avg;
 
 }
