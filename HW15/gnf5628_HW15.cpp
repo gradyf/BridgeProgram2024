@@ -1,6 +1,4 @@
-//
-// Created by Gray Forrester on 4/27/24.
-//
+
 #include <iostream>
 #include <string>
 #include <fstream>
@@ -8,27 +6,27 @@
 
 using namespace std;
 
+
 class People {
 public:
-    double paid;
-    double owedAmt;
-    double owes;
-    string name;
-    string owedTo;
+    double amtInitiallyPaid;
+    double amtOwedToPerson;
+    double amtOwedToOthers;
+    double amtPaidToOthers;
+    string nameOfPerson;
+    string nameOwedTo;
 
-    People(double amountPaid, string overallName, double amountOwed = 0.00, double amountOwes = 0.00,
-           string owedMoneyTo = "")
-            : paid(amountPaid), name(overallName), owedAmt(amountOwed), owes(amountOwes), owedTo(owedMoneyTo) {}
+    People(double amountPaid, const string &overallName, double amountOwed = 0.00, double amountOwes = 0.00,
+           const string &owedMoneyTo = "")
+            : amtInitiallyPaid(amountPaid), nameOfPerson(overallName), amtOwedToPerson(amountOwed),
+              amtOwedToOthers(amountOwes), nameOwedTo(owedMoneyTo), amtPaidToOthers() {}
 
     People();
 
-    void set_owedAmt(double newOwed) {
-        this->owedAmt = newOwed;
+    bool operator<(const People &ppl) const {
+        return (amtOwedToOthers < ppl.amtOwedToOthers);
     }
 
-    void set_owes(double newOwes) {
-        this->owes = newOwes;
-    }
 };
 
 class Node {
@@ -59,18 +57,17 @@ public:
     void printList() {
         Node *n = head;
         while (n != nullptr) {
-            if (n->person.owes == 0 && n->person.owedAmt == 0) {
-                cout << n->person.name << ", you don't need to do anything " << endl;
-            } else {
-                cout << n->person.name << " paid " << n->person.paid << "; Owes: " << n->person.owes << "; Is Owed: "
-                     << n->person.owedAmt << endl;
-            }
+
+            cout << n->person.nameOfPerson << " paid " << n->person.amtInitiallyPaid << "; Owes: "
+                 << n->person.amtOwedToOthers << "; Is Owed: " << n->person.amtOwedToPerson << "; Owes to: " <<
+                 n->person.nameOwedTo << endl;
 
             n = n->next;
         }
+        cout << endl;
     }
 
-    void addNode(Node *n) {
+    void addNodeEnd(Node *n) {
         Node *current = head;
         if (current == nullptr) {
             head = n;
@@ -88,44 +85,93 @@ public:
 
     }
 
-    void clearList() {
+    void setInitialAmts(double avg) const {
         Node *current = head;
         while (current != nullptr) {
-            Node *nextNode = current->next;
-            delete current;
-            current = nextNode;
-        }
-        head = nullptr;
-    }
-
-    void updateOwesOrOwed(double avg) {
-        Node *current = head;
-        while (current != nullptr) {
-            if (current->person.paid > avg) {
-                current->person.owedAmt = current->person.paid - avg;
-            } else if (current->person.paid < avg) {
-                current->person.owes = avg - current->person.paid;
+            if (current->person.amtInitiallyPaid > avg) {
+                current->person.amtOwedToPerson = current->person.amtInitiallyPaid - avg;
+            } else if (current->person.amtInitiallyPaid < avg) {
+                current->person.amtOwedToOthers = avg - current->person.amtInitiallyPaid;
             }
             current = current->next;
         }
-
     }
-
-    bool everyoneEven(double avg) {
-        Node *current = head;
-        bool even = true;
-        while (current != nullptr) {
-            if (current->person.paid == avg || current->person.owes == avg || current->person.owedAmt == avg) {
-                continue;
-            } else {
-                even = false;
-            }
-            current = current->next;
-        }
-        return even;
-    }
-
 };
+
+void printVect(vector<People> vect) {
+    for (int x = 0; x < vect.size(); x++) {
+
+        if (vect[x].amtOwedToOthers == 0 && vect[x].amtOwedToPerson == 0) {
+            cout << vect[x].nameOfPerson << ", you don't need to do anything " << endl;
+        } else if (vect[x].amtPaidToOthers != 0) {
+            cout << vect[x].nameOfPerson << ", you give " << vect[x].nameOwedTo << "$" << vect[x].amtPaidToOthers
+                 << endl;
+
+        } else {
+            cout << vect[x].nameOfPerson << " initially paid " << vect[x].amtInitiallyPaid << "; Owes: "
+                 << vect[x].amtOwedToOthers << "; Is Owed: " << vect[x].amtOwedToPerson << "; Owes to: " <<
+                 vect[x].nameOwedTo << "; Has repaid: " << vect[x].amtPaidToOthers << endl;
+        }
+    }
+}
+
+
+void payBack(vector<People> &owes, vector<People> &isOwed) {
+
+    int owesTrack = 0;
+    int owedTrack = 0;
+
+
+    while (owesTrack < owes.size()) {
+        sort(owes.begin(), owes.end());
+        owedTrack = 0;
+        while (owedTrack < isOwed.size()) {
+
+            if (owes[owesTrack].amtOwedToOthers > isOwed[owedTrack].amtOwedToPerson &&
+                isOwed[owedTrack].amtOwedToPerson != 0 && owes[owesTrack].amtPaidToOthers != 0) {
+
+                owes[owesTrack].nameOwedTo = isOwed[owedTrack].nameOfPerson;
+
+                People *temp = new People(owes[owesTrack].amtInitiallyPaid, owes[owesTrack].nameOfPerson + "2");
+                temp->amtOwedToOthers = owes[owesTrack].amtOwedToOthers - isOwed[owedTrack].amtOwedToPerson;
+
+                owes.push_back(*temp);
+
+                cout << owes[owesTrack].nameOfPerson << " is repaying " << owes[owesTrack].nameOwedTo
+                     << " " << owes[owesTrack].amtPaidToOthers << endl;
+                owes[owesTrack].amtPaidToOthers = isOwed[owedTrack].amtOwedToPerson;
+                owes[owesTrack].amtOwedToOthers =
+                        owes[owesTrack].amtOwedToOthers - isOwed[owedTrack].amtOwedToPerson;
+
+                isOwed[owedTrack].amtOwedToPerson =
+                        isOwed[owedTrack].amtOwedToPerson - owes[owesTrack].amtPaidToOthers;
+
+
+            } else if (owes[owesTrack].amtOwedToOthers < isOwed[owedTrack].amtOwedToPerson &&
+                       isOwed[owedTrack].amtOwedToPerson != 0) {
+
+                owes[owesTrack].nameOwedTo = isOwed[owedTrack].nameOfPerson;
+
+
+                cout << owes[owesTrack].nameOfPerson << " is repaying " << owes[owesTrack].nameOwedTo
+                     << " " << owes[owesTrack].amtPaidToOthers << endl;
+                owes[owesTrack].amtPaidToOthers = owes[owedTrack].amtOwedToOthers;
+                owes[owesTrack].amtOwedToOthers = owes[owesTrack].amtOwedToOthers - owes[owesTrack].amtPaidToOthers;
+
+                isOwed[owedTrack].amtOwedToPerson =
+                        isOwed[owedTrack].amtOwedToPerson - owes[owesTrack].amtPaidToOthers;
+
+
+            }
+            owedTrack++;
+
+        }
+        owesTrack++;
+    }
+
+
+}
+
 
 int main() {
 
@@ -136,12 +182,17 @@ int main() {
 
     int count = 0;
 
-    LList *list = new LList();
+    LList *listOriginal = new LList();
 
-    cout << "Enter the filename: " << endl;
-    cin >> fileName;
+    vector<People> final;
+    vector<People> owes;
+    vector<People> isOwed;
 
-    in_stream.open(fileName);
+//    cout << "Enter the filename: " << endl;
+//    cin >> fileName;
+
+//    in_stream.open(fileName);
+    in_stream.open("List3.txt");
 
     /*
 
@@ -155,16 +206,19 @@ int main() {
 
      */
 
+
     if (in_stream.fail()) {
         cout << "Input file opening failed.\n";
         exit(1);
     }
     while (in_stream >> paid) {
 
+        in_stream.ignore(9999, ' ');
+
         getline(in_stream, name);
 
         Node *temp = new Node(People(paid, name));
-        list->addNode(temp);
+        listOriginal->addNodeEnd(temp);
 
         sum = sum + paid;
         count++;
@@ -175,12 +229,23 @@ int main() {
 
     avg = sum / count;
 
-    list->printList();
+    listOriginal->setInitialAmts(avg);
 
-    list->updateOwesOrOwed(avg);
+    Node *current = listOriginal->head;
+    while (current != nullptr) {
+        if (current->person.amtOwedToOthers == 0 && current->person.amtOwedToPerson == 0) {
+            final.push_back(current->person);
+        } else if (current->person.amtOwedToOthers != 0 && current->person.amtOwedToPerson == 0) {
+            owes.push_back(current->person);
+        } else {
+            isOwed.push_back(current->person);
+        }
 
-    cout << endl;
+        current = current->next;
+    }
 
-    list->printList();
+    printVect(final);
+
+    cout << "In the end, you should have all spent around " << avg;
 
 }
