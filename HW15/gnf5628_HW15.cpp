@@ -11,16 +11,23 @@ using namespace std;
 class People {
 public:
     double paid;
-    double owed;
+    double owedAmt;
+    double owes;
     string name;
+    string owedTo;
 
-    People(double amountPaid, string overallName, double amountOwed = 0.00)
-            : paid(amountPaid), name(overallName), owed(amountOwed) {}
+    People(double amountPaid, string overallName, double amountOwed = 0.00, double amountOwes = 0.00,
+           string owedMoneyTo = "")
+            : paid(amountPaid), name(overallName), owedAmt(amountOwed), owes(amountOwes), owedTo(owedMoneyTo) {}
 
     People();
 
-    void set_owed(double newOwed) {
-        this->owed = newOwed;
+    void set_owedAmt(double newOwed) {
+        this->owedAmt = newOwed;
+    }
+
+    void set_owes(double newOwes) {
+        this->owes = newOwes;
     }
 };
 
@@ -52,7 +59,13 @@ public:
     void printList() {
         Node *n = head;
         while (n != nullptr) {
-            cout << n->person.name << " paid " << n->person.paid << endl;
+            if (n->person.owes == 0 && n->person.owedAmt == 0) {
+                cout << n->person.name << ", you don't need to do anything " << endl;
+            } else {
+                cout << n->person.name << " paid " << n->person.paid << "; Owes: " << n->person.owes << "; Is Owed: "
+                     << n->person.owedAmt << endl;
+            }
+
             n = n->next;
         }
     }
@@ -85,43 +98,89 @@ public:
         head = nullptr;
     }
 
-};
+    void updateOwesOrOwed(double avg) {
+        Node *current = head;
+        while (current != nullptr) {
+            if (current->person.paid > avg) {
+                current->person.owedAmt = current->person.paid - avg;
+            } else if (current->person.paid < avg) {
+                current->person.owes = avg - current->person.paid;
+            }
+            current = current->next;
+        }
 
+    }
+
+    bool everyoneEven(double avg) {
+        Node *current = head;
+        bool even = true;
+        while (current != nullptr) {
+            if (current->person.paid == avg || current->person.owes == avg || current->person.owedAmt == avg) {
+                continue;
+            } else {
+                even = false;
+            }
+            current = current->next;
+        }
+        return even;
+    }
+
+};
 
 int main() {
 
     ifstream in_stream;
 
-    double paid;
-    string name;
+    double paid, sum = 0, avg = 0;
+    string name, fileName;
+
+    int count = 0;
 
     LList *list = new LList();
 
-    vector<People> peopleList;
+    cout << "Enter the filename: " << endl;
+    cin >> fileName;
 
-    in_stream.open("List1.txt");
+    in_stream.open(fileName);
+
+    /*
+
+     List3.txt:
+
+     76.8 Jason J. Jones
+     89 Natalie Johnson
+     11 Dalton Smith
+     44.2 Sheryl Carter
+     0 John Martin
+
+     */
 
     if (in_stream.fail()) {
         cout << "Input file opening failed.\n";
         exit(1);
     }
     while (in_stream >> paid) {
-        getline(in_stream, name);
-        peopleList.push_back(People(paid, name));
 
-        Node* temp = new Node(People(paid, name));
+        getline(in_stream, name);
+
+        Node *temp = new Node(People(paid, name));
         list->addNode(temp);
 
+        sum = sum + paid;
+        count++;
+
     }
+
     in_stream.close();
 
+    avg = sum / count;
 
     list->printList();
 
+    list->updateOwesOrOwed(avg);
 
+    cout << endl;
 
-//    delete list;
-//    list->clearList();
-
+    list->printList();
 
 }
