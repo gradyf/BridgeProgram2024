@@ -101,20 +101,20 @@ void printVect(vector<People> vect) {
     }
 }
 
-void sortOwes(vector<People>& vect) {
-    for(int x = 0; x < vect.size(); x++) {
+void sortOwes(vector<People> &vect) {
+    for (int x = 0; x < vect.size(); x++) {
         for (int y = x; y < vect.size(); y++) {
-            if(vect[x].amtOwedToOthers > vect[y].amtOwedToOthers) {
+            if (vect[x].amtOwedToOthers > vect[y].amtOwedToOthers) {
                 swap(vect[x], vect[y]);
             }
         }
     }
 }
 
-void sortOwed(vector<People>& vect) {
-    for(int x = 0; x < vect.size(); x++) {
+void sortOwed(vector<People> &vect) {
+    for (int x = 0; x < vect.size(); x++) {
         for (int y = x; y < vect.size(); y++) {
-            if(vect[x].amtOwedToPerson > vect[y].amtOwedToPerson) {
+            if (vect[x].amtOwedToPerson > vect[y].amtOwedToPerson) {
                 swap(vect[x], vect[y]);
             }
         }
@@ -122,10 +122,32 @@ void sortOwed(vector<People>& vect) {
 }
 
 void payBack(vector<People> &owes, vector<People> &isOwed) {
+    int owesIndex = 0, owedIndex = 0;
+
+    while (owesIndex < owes.size() && owedIndex < isOwed.size()) {
+        double payment = min(owes[owesIndex].amtOwedToOthers, isOwed[owedIndex].amtOwedToPerson);
+        owes[owesIndex].amtOwedToOthers -= payment;
+        isOwed[owedIndex].amtOwedToPerson -= payment;
+
+        cout << owes[owesIndex].nameOfPerson << ", you give " << isOwed[owedIndex].nameOfPerson << " $" << payment
+             << endl;
+
+        if (owes[owesIndex].amtOwedToOthers == 0) {
+            owesIndex++;
+        }
+        if (isOwed[owedIndex].amtOwedToPerson == 0) {
+            owedIndex++;
+        }
+
+    }
 
 }
 
 int main() {
+
+    cout.setf(ios::fixed);
+    cout.setf(ios::showpoint);
+    cout.precision(2);
 
     ifstream in_stream;
 
@@ -140,11 +162,10 @@ int main() {
     vector<People> owes;
     vector<People> isOwed;
 
-//    cout << "Enter the filename: " << endl;
-//    cin >> fileName;
+    cout << "Enter the filename: " << endl;
+    cin >> fileName;
 
-//    in_stream.open(fileName);
-    in_stream.open("List3.txt");
+    in_stream.open(fileName);
 
     /*
 
@@ -196,28 +217,13 @@ int main() {
         current = current->next;
     }
 
+    sortOwes(owes);
+    sortOwed(isOwed);
+
+
     printVect(final);
 
-    cout << endl;
-
-    printVect(owes);
-
-    cout << endl;
-
-    printVect(isOwed);
-
-    sortOwes(owes);
-    sortOwes(isOwed);
-
-    cout << endl;
-
-    printVect(owes);
-
-    cout << endl;
-
-    printVect(isOwed);
-
-    cout << endl;
+    payBack(owes, isOwed);
 
     cout << "In the end, you should have all spent around " << "$" << avg;
 
