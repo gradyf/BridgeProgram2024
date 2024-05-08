@@ -5,10 +5,9 @@
 
 using namespace std;
 
-template <typename T>
-bool pascalChecker(ifstream &in_file) {
+const bool pascalChecker(ifstream &in_file) {
     char symb;
-    list<T> tracker;
+    list<char> tracker;
 
     while (in_file >> symb) {
         if (symb == '[') {
@@ -38,7 +37,7 @@ bool pascalChecker(ifstream &in_file) {
 void checkerOutput(ifstream &in_file) {
 
     if (pascalChecker(in_file)) {
-        cout << in_file."Success!";
+        cout << "Success!";
     }
     else {
 
