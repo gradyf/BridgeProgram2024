@@ -1,12 +1,14 @@
 #include <iostream>
 #include <fstream>
-#include <vector>
+#include <list>
+
 
 using namespace std;
 
+template <typename T>
 bool pascalChecker(ifstream &in_file) {
     char symb;
-    vector<char> tracker;
+    list<T> tracker;
 
     while (in_file >> symb) {
         if (symb == '[') {
