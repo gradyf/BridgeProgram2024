@@ -36,11 +36,12 @@ const bool pascalChecker(ifstream &in_file) {
 
 void checkerOutput(ifstream &in_file) {
 
+
     if (pascalChecker(in_file)) {
-        cout << "Success!";
+        cout << " was a Success!" << endl;
     }
     else {
-
+        cout << " was incorrect!" << endl;
     }
 
 }
@@ -49,7 +50,9 @@ void checkerOutput(ifstream &in_file) {
 int main() {
     ifstream in_stream;
 
-    in_stream.open("P1_1.txt");
+    string test = "P1_1.txt";
+
+    in_stream.open(test);
 
     if(in_stream.fail()) {
         cout << "The program failed to open the text file.";
@@ -58,8 +61,30 @@ int main() {
     }
     else {
 
-//        cout << "success";
-        cout << pascalChecker(in_stream);
+        cout << test;
+        checkerOutput(in_stream);
+
+    }
+
+
+
+    in_stream.close();
+
+    cout << "----------NEXT TEST----------" << endl;
+
+    test = "P1_2.txt";
+
+    in_stream.open(test);
+
+    if(in_stream.fail()) {
+        cout << "The program failed to open the text file.";
+        exit(1);
+
+    }
+    else {
+
+        cout << test;
+        checkerOutput(in_stream);
 
     }
 
